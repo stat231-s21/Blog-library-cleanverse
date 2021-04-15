@@ -69,10 +69,6 @@ Note that the `echo = FALSE` parameter was added to the code chunk to prevent pr
 
 You can include [Links](https://www.datadreaming.org/post/r-markdown-theme-gallery/) and images ![team logo](https://raw.githubusercontent.com/stat231-s21/Blog-library-cleanverse/main/images/s1g6-publichealth.png?token=AGMTX5XTR6OSIG2YBI4FWT3AOVTZU)
 
-You can embed a gif like this.  (You can also embed a Shiny app using the `iframe` tag.)
-
-<iframe src="https://giphy.com/embed/XHVmD4RyXgSjd8aUMb" width="480" height="360" frameBorder="0" class="giphy-embed" allowFullScreen></iframe> <p> <a href="https://giphy.com/search/pugs">via GIPHY</a> </p>
-
 # You can even create tabs if you want! {.tabset .tabset-fade .tabset-pills}
 
 ## Bulleted list
