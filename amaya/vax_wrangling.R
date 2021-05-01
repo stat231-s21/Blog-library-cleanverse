@@ -3,7 +3,7 @@ library(dplyr)
 library(readxl)
 
 # create TN plot: proportion of race vaccinated over time
-tn_vax <- read_excel("/Users/smolea/git/Shiny-S1G6-PublicHealth/amaya/TN.covid.demographics.state.XLSX") %>%
+tn_vax <- read_excel("/Users/smolea/git/Blog-library-cleanverse/amaya/TN.covid.demographics.state.XLSX") %>%
   filter(CATEGORY == "RACE") %>%
   mutate(date = as.Date(DATE),
          race = CAT_DETAIL,
@@ -24,7 +24,7 @@ tn
 
 
 # create TN plot: proportion of race vaccinated over time
-ca_vax <- read_csv("/Users/smolea/git/Shiny-S1G6-PublicHealth/amaya/vaccine_demographics_ca.csv") %>%
+ca_vax <- read_csv("/Users/smolea/git/Blog-library-cleanverse/amaya/vaccine_demographics_ca.csv") %>%
   filter(demographic_category == "Race/Ethnicity") %>%
   mutate(race0 = demographic_value,
          date = administered_date,
