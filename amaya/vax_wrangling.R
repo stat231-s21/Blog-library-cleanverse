@@ -23,7 +23,7 @@ tn <- ggplot(tn_vax, aes(x = date, y = frac, colour = race)) +
 tn
 
 
-# create TN plot: proportion of race vaccinated over time
+# create CA plot: proportion of race vaccinated over time
 ca_vax <- read_csv("/Users/smolea/git/Blog-library-cleanverse/amaya/vaccine_demographics_ca.csv") %>%
   filter(demographic_category == "Race/Ethnicity") %>%
   mutate(race0 = demographic_value,
@@ -51,3 +51,35 @@ ca_vax <- read_csv("/Users/smolea/git/Blog-library-cleanverse/amaya/vaccine_demo
 ca <- ggplot(ca_vax, aes(x = date, y = frac, colour = race)) +
   geom_line()
 ca
+
+
+# create data for comparison maps
+ca_county <- read_csv("/Users/smolea/git/Blog-library-cleanverse/amaya/CA_countydemo.csv") 
+ca_county <- ca_county %>%
+  filter(demographic_category == "Race/Ethnicity" & (administered_date == as.Date("2021-04-15") | administered_date == as.Date("2021-02-15"))) %>%
+  select(county, demographic_value, est_population, cumulative_fully_vaccinated, administered_date) %>%
+  mutate(new = case_when(demographic_value == "American Indian or Alaska Native" ~ "Non-White",
+                         demographic_value == "Multiracial" ~ "Non-White",
+                         demographic_value == "Other" ~ "Non-White",
+                         demographic_value == "Black or African American" ~ "Non-White",
+                         demographic_value == "Latino" ~ "Non-White",
+                         demographic_value == "Native Hawaiian or Other Pacific Islander" ~ "Non-White",
+                         demographic_value == "Asian" ~ "Non-White",
+                         demographic_value == "Unknown" ~ "Non-White",
+                         TRUE ~ "White"))
+ca_county
+tn_county <- read_excel("/Users/smolea/git/Blog-library-cleanverse/amaya/TN_County_Vax_Demographics.XLSX") %>%
+  mutate(date = as.Date(DATE)) %>%
+  filter(CATEGORY == "RACE" & (date == as.Date("2021-02-15") | date == as.Date("2021-04-15"))) %>%
+  select(COUNTY, CAT_DETAIL, RECIPIENT_COUNT, date) %>%
+  mutate(new = case_when(CAT_DETAIL == "UNKNOWN" ~ "Unknown",
+                         CAT_DETAIL == "ASIAN" ~ "Non-White",
+                         CAT_DETAIL == "OTHER/MULTIRACIAL" ~ "Non-White",
+                         CAT_DETAIL == "BLACK OR AFRICAN AMERICAN" ~ "Non-White",
+                         TRUE ~ "White"))
+tn_county
+  
+
+
+  
+  
