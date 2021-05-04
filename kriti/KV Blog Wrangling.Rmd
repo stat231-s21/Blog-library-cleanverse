@@ -1,0 +1,90 @@
+---
+title: "KV Blog Wrangling"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+
+library(tidyverse)
+library(viridis)
+# for networks
+library(ggnetwork)
+library(igraph)
+# for mapping
+library(datasets)
+library(mdsr)
+library(gapminder)
+library(fivethirtyeight)
+library(maps)
+library(ggplot2)
+library(gganimate)
+
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r}
+kv_vaccine_states <- read_csv("us-daily-covid-vaccine-doses-administered.csv")
+
+states <- c("Alabama",
+"Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida",
+"Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana",
+"Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri",
+"Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York",
+"North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island",
+"South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia",
+"Washington", "West Virginia", "Wisconsin", "Wyoming")
+
+kv_states <- kv_vaccine_states %>%
+  filter(Entity %in% states) %>%
+  mutate(state = tolower(Entity)) %>%
+  select(Day, state, daily_vaccinations) %>%
+ filter(Day == "2021-02-14" | Day == "2021-02-15")
+  #group_by(Day, Entitylower)
+         
+
+
+```
+
+## Making Map
+
+You can also embed plots, for example:
+
+```{r}
+usa_states <- map_data(map = "state"
+                       , region = ".") 
+head(usa_states)
+
+
+usa_vaccine_states <- kv_states %>%
+  left_join(usa_states, by = c("state" = "region"))
+
+ggplot(usa_vaccine_states, aes(x = long, y = lat, group = group
+                      , fill = daily_vaccinations)) +
+  geom_polygon(color = "white") +
+  theme_void() +
+  coord_fixed(ratio = 1.3) +
+  labs(fill = "Number of People Vaccinated", title = "USA Daily Vaccinations by State", 
+       caption = "Kriti Verma") +
+  theme(legend.position="right") +
+  scale_fill_distiller(palette = "YlGnBu", direction = "horizantle") +
+  #transition_time(time = Day)
+  transition_states(Day, transition_length = 10, state_length = 1)
+  
+ # gganimate(animatevar)
+  #transition_time(Day, range = c("2-14-2021", "3-4-2021"))
+  
+#  transition_states(Day, state_length = 1)
+  #transition_time(Day)
+  #transition_states(Day, 3, 20)
+  #transition_states(Day, transition_length = 10, state_length = 1)
+  #transition_time(Day, transition_length = 10, time_length = 1)
+  
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
