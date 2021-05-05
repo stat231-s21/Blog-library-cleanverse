@@ -5,12 +5,10 @@ output: pdf_document
 
 #libraries
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(rvest)
 library(dplyr)
 library(robotstxt)
-library(stringr)
 ```
 
 #data import
@@ -60,7 +58,8 @@ ratio_vax2 <- ratio_vax %>%
 ratio_vax2["35", "state"] <- "new york"
 ```
 
-# joining 
+# joining and finalizing
 ```{r setup, include=FALSE}
 final_ratios <- left_join(elections2, ratio_vax2, by = "state")
+write.csv(final_ratios,"/Users/clarapage/Desktop/Blog-library-cleanverse/clara/finalratios.csv")
 ```
