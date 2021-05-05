@@ -1,0 +1,31 @@
+---
+title: "clara_data"
+output: pdf_document
+---
+
+#libraries
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(rvest)
+library(robotstxt)
+```
+
+#data import
+```{r setup, include=FALSE}
+path_in <- "/Users/clarapage/Desktop/Blog-library-cleanverse/blog_data"
+ratio_vax <- read_csv(paste0(path_in,"/covidcdc.csv"))
+elections <- read_csv(paste0(path_in,"/1976-2020-president.csv"))
+```
+
+# elections wrangling 
+#data import
+```{r setup, include=FALSE}
+elections <- elections %>%
+  filter(year >= 2020) %>%
+  filter(candidate == "BIDEN, JOSEPH R. JR" | candidate == "TRUMP, DONALD J.") %>%
+  select(state, party_detailed, candidatevotes) %>%
+  gather(key = key, value = value, -c(candidatevotes)) %>%
+  unite(key, c(candidatevotes, key), sep = ".", remove = TRUE) %>%
+  spread(key = key, value = value)
+```
