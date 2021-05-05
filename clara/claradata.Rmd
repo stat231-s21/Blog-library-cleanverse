@@ -21,7 +21,7 @@ elections <- read_csv(paste0(path_in,"/1976-2020-president.csv"))
 # elections wrangling 
 ```{r setup, include=FALSE}
 elections2 <- elections %>%
-  #fix year and candidates
+  #fix year and candidates, etc.
   filter(year >= 2020) %>%
   filter(candidate == "BIDEN, JOSEPH R. JR" | candidate == "TRUMP, DONALD J.") %>%
   # combine states by row
