@@ -77,7 +77,7 @@ ggplot(usa_vaccine_states, aes(x = long, y = lat, group = group
   transition_states(Day, transition_length = 10, state_length = 1)
   
  # gganimate(animatevar)
-  #transition_time(Day, range = c("2-14-2021", "3-4-2021"))
+  #transition_time(Day, range = c("2-14-2021", "3-4-2021")) 
   
 #  transition_states(Day, state_length = 1)
   #transition_time(Day)
