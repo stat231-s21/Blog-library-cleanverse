@@ -24,13 +24,16 @@ elections <- read_csv(paste0(path_in,"/1976-2020-president.csv"))
 ```{r setup, include=FALSE}
 #basic wrangling
 elections <- elections %>%
+  #fix year and candidates
   filter(year >= 2020) %>%
   filter(candidate == "BIDEN, JOSEPH R. JR" | candidate == "TRUMP, DONALD J.") %>%
+  # combine states by row
   select(state, party_detailed, candidatevotes) %>%
   gather(key = key, value = value, -c(state, party_detailed)) %>%
   unite(key, c(party_detailed, key), sep = ".", remove = TRUE) %>%
-  spread(key = key, value = value)
-
-
-  str_to_title(state) 
+  spread(key = key, value = value) %>%
+  #final touches
+  mutate(state = tolower(state)) %>%
+  rename(dem_votes = DEMOCRAT.candidatevotes) %>%
+  rename(rep_votes = REPUBLICAN.candidatevotes)
 ```
