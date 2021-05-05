@@ -22,8 +22,7 @@ elections <- read_csv(paste0(path_in,"/1976-2020-president.csv"))
 
 # elections wrangling 
 ```{r setup, include=FALSE}
-#basic wrangling
-elections <- elections %>%
+elections2 <- elections %>%
   #fix year and candidates
   filter(year >= 2020) %>%
   filter(candidate == "BIDEN, JOSEPH R. JR" | candidate == "TRUMP, DONALD J.") %>%
@@ -36,4 +35,32 @@ elections <- elections %>%
   mutate(state = tolower(state)) %>%
   rename(dem_votes = DEMOCRAT.candidatevotes) %>%
   rename(rep_votes = REPUBLICAN.candidatevotes)
+```
+
+# ratio wrangling
+```{r setup, include=FALSE}
+ratio_vax2 <- ratio_vax %>%
+  #renaming
+  rename(state = `State/Territory/Federal Entity`) %>%
+  rename(delivered = `Total Doses Delivered`) %>%
+  rename(delivered_100 = `Doses Delivered per 100K`) %>%
+  rename(admin = `Total Doses Administered by State where Administered`) %>%
+  rename(admin_100 = `Doses Administered per 100k by State where Administered`) %>%
+  rename(percent_one_18 = `Percent of 18+ Pop with at least One Dose by State of Residence`) %>%
+  rename(percent_full_18 = `Percent of 18+ Pop Fully Vaccinated by State of Residence`) %>%
+  #preparing data
+  select(state, delivered, delivered_100, admin, admin_100, percent_one_18, percent_full_18) %>%
+  mutate(state = tolower(state)) %>%
+  filter(state != "american samoa", state != "federated states of micronesia", state != "guam") %>%
+  filter(state != "indian health svc", state != "marshall islands", state != "northern mariana islands") %>%
+  filter(state != "puerto rico", state != "republic of palau", state != "virgin islands", state != "bureau of prisons") %>%
+  filter(state != "dept of defense", state != "veterans health")
+
+#fixing a state name
+ratio_vax2["35", "state"] <- "new york"
+```
+
+# joining 
+```{r setup, include=FALSE}
+final_ratios <- left_join(elections2, ratio_vax2, by = "state")
 ```
