@@ -56,20 +56,21 @@ ggplot(ratio_map, aes(x = long, y = lat, group = group
   theme(legend.position="bottom") +
   scale_fill_distiller(palette = "BuPu", direction = "horizantle")
 
+
 #political map
-#new_scale_color()
 ggplot(ratio_map, aes(x = long, y = lat, group = group, fill = ratio_overall)) +
   coord_fixed(ratio = 1.3) +
+  #republican
   geom_polygon(data = map_rep, color = "white") +
   theme_void() +
   labs(fill = "Republican Ratios") +
   theme(legend.position="bottom") +
   scale_fill_distiller(palette = "Reds", direction = "horizantle") +
+  #democrat
   new_scale_fill() +
   scale_fill_distiller(palette = "PuBu", direction = "horizantle") +
   geom_polygon(data = map_dem, color = "white", aes(x = long, y = lat, group = group, fill = ratio_overall)) +
-  theme_void() +
-  labs(fill = "Democratic Ratios") +
+  labs(title = "Ratio of Vaccines Received to Vaccines Administered", subtitle = "Stratified by Politics (2020 Presidential Election Results)", fill = "Democratic Ratios") +
   theme(legend.position="bottom")
 ```
 
