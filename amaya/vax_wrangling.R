@@ -71,4 +71,4 @@ tn_county <- read_excel("/Users/smolea/git/Blog-library-cleanverse/amaya/TN_Coun
   group_by(date, COUNTY) %>%
   summarise(total_vax = sum(RECIPIENT_COUNT, na.rm = TRUE))
 # writing to csv
-write_csv(x = ca_county, "/Users/smolea/git/Blog-library-cleanverse/amaya/ca_county.csv")
+write_csv(x = tn_county, "/Users/smolea/git/Blog-library-cleanverse/amaya/tn_county.csv")
