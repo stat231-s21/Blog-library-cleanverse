@@ -37,7 +37,8 @@ ggplot(ca_map, aes(x = long, y = lat, group = group, fill = total_vax)) +
   coord_fixed(ratio = 1.3) +
   facet_wrap(~administered_date) +
   labs(fill = "Total Vaccinations") +
-  scale_fill_viridis(option = "magma", direction = -1) 
+  scale_fill_viridis(option = "magma", direction = -1) +
+  ggtitle("Vaccinations in California, Spring 2021")
 
 # read in and plot tn county vaccinations
 options(scipen = 999)
@@ -54,7 +55,8 @@ ggplot(tn_map, aes(x = long, y = lat, group = group, fill = total_vax)) +
   coord_fixed(ratio = 1.3) +
   facet_wrap(~date) +
   labs(fill = "Total Vaccinations") +
-  scale_fill_viridis(option = "magma", direction = -1) 
+  scale_fill_viridis(option = "magma", direction = -1) +
+  ggtitle("Vaccinations in Tennessee, Spring 2021")
   
 
 
