@@ -5,15 +5,18 @@ library(readxl)
 # read in and plot ca vax over time
 ca_time <- read_csv("/Users/smolea/git/Blog-library-cleanverse/amaya/ca_time.csv")
 ca_tg <- ggplot(ca_time, aes(x = date, y = frac, colour = race)) +
-  geom_line()
+  geom_line() +
+  labs(colour = "Race", title = "Proportion of Racial Groups Vaccinated Over Time", 
+       subtitle = "California, 2021") +
+  xlab("Date") + ylab("Proportion of Racial Group")
 ca_tg
  
-
 # read in and plot tn vax over time 
 tn_time <- read_csv("/Users/smolea/git/Blog-library-cleanverse/amaya/tn_time.csv")
 tn_tg <- ggplot(tn_time, aes(x = date, y = frac, colour = race)) +
   geom_line() +
-  labs(colour = "Race", title = "Proportion of Racial Groups Vaccinated Over Time in Tennessee, 2021") +
+  labs(colour = "Race", title = "Proportion of Racial Groups Vaccinated Over Time", 
+       subtitle = "Tennessee, 2021") +
   xlab("Date") + ylab("Proportion of Racial Group")
 tn_tg
 
