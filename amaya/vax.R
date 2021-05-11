@@ -6,7 +6,7 @@ library(viridis)
 
 # read in and plot ca vax over time
 ca_time <- read_csv("/Users/smolea/git/Blog-library-cleanverse/amaya/ca_time.csv") %>%
-  filter(race != "Unknown", race != "Other/Multiracial")
+  filter(race != "Unknown")
 ca_tg <- ggplot(ca_time, aes(x = date, y = frac, colour = race)) +
   geom_line() +
   labs(colour = "Race", title = "Proportion of Racial Groups Vaccinated Over Time", 
@@ -15,7 +15,7 @@ ca_tg <- ggplot(ca_time, aes(x = date, y = frac, colour = race)) +
 ca_tg
 # read in and plot tn vax over time 
 tn_time <- read_csv("/Users/smolea/git/Blog-library-cleanverse/amaya/tn_time.csv") %>%
-  filter(race != "UNKNOWN", race != "OTHER/MULTIRACIAL")
+  filter(race != "UNKNOWN")
 tn_tg <- ggplot(tn_time, aes(x = date, y = frac, colour = race)) +
   geom_line() +
   labs(colour = "Race", title = "Proportion of Racial Groups Vaccinated Over Time", 
@@ -56,7 +56,7 @@ ggplot(tn_map, aes(x = long, y = lat, group = group, fill = total_vax)) +
   coord_fixed(ratio = 1.3) +
   facet_wrap(~date) +
   labs(fill = "Total Vaccinations") +
-  scale_fill_viridisdirection(direction = -1) +
+  scale_fill_viridis(direction = -1) +
   ggtitle("Vaccinations in Tennessee, Spring 2021")
   
 
