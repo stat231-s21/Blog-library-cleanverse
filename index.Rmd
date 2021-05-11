@@ -40,7 +40,7 @@ summary(cars)
 Let's clean up the format of that output:
 
 ```{r pretty, echo=FALSE, warning=FALSE, message=FALSE}
-library(kableExtra)
+#library(kableExtra)
 summary(cars) %>%
   kable(col.names = c("Speed", "Distance")
         , row.names = F) %>%
