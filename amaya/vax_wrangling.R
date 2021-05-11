@@ -18,6 +18,8 @@ tn_vax <- read_excel("/Users/smolea/git/Blog-library-cleanverse/amaya/TN.covid.d
                           race == "WHITE" ~ count/5387356.908,
                           race == "UNKNOWN" ~ 0,
                           TRUE ~ count))
+# writing to csv
+write_csv(x = tn_vax, "/Users/smolea/git/Blog-library-cleanverse/amaya/tn_time.csv")
 tn <- ggplot(tn_vax, aes(x = date, y = frac, colour = race)) +
   geom_line()
 tn
@@ -48,6 +50,8 @@ ca_vax <- read_csv("/Users/smolea/git/Blog-library-cleanverse/amaya/vaccine_demo
                           race == "Asian" ~ count/5751880.2,
                           race == "Unknown" ~ 0,
                           TRUE ~ count))
+# writing to csv
+write_csv(x = ca_vax, "/Users/smolea/git/Blog-library-cleanverse/amaya/ca_time.csv")
 ca <- ggplot(ca_vax, aes(x = date, y = frac, colour = race)) +
   geom_line()
 ca
@@ -58,9 +62,13 @@ ca_county <- read_csv("/Users/smolea/git/Blog-library-cleanverse/amaya/CA_county
   filter(demographic_category == "Age Group" & (administered_date == as.Date("2021-04-15") | administered_date == as.Date("2021-02-15"))) %>%
   group_by(administered_date, county) %>%
   summarise(total_vax = sum(cumulative_fully_vaccinated, na.rm = TRUE))
+# writing to csv
+write_csv(x = ca_county, "/Users/smolea/git/Blog-library-cleanverse/amaya/ca_county.csv")
 
 tn_county <- read_excel("/Users/smolea/git/Blog-library-cleanverse/amaya/TN_County_Vax_Demographics.XLSX") %>%
   mutate(date = as.Date(DATE)) %>%
   filter((date == as.Date("2021-02-15") | date == as.Date("2021-04-15")) & CATEGORY == "SEX") %>%
   group_by(date, COUNTY) %>%
   summarise(total_vax = sum(RECIPIENT_COUNT, na.rm = TRUE))
+# writing to csv
+write_csv(x = tn_county, "/Users/smolea/git/Blog-library-cleanverse/amaya/tn_county.csv")
