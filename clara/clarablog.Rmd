@@ -77,7 +77,8 @@ grid.arrange(vax_overall_map, ratio_overall_map, ncol=2)
 ggplot(ratios.2, aes(x=percent_full_18, y=ratio_overall)) + 
   geom_point() +
   geom_smooth(method="lm", se=TRUE, fullrange=FALSE) +
-    labs(title = "Association Between % Vaccination and Administration", x = "Percent of 18+ Population Fully Vaccinated", y = "Ratio of Recieved/Admin Vaccines")
+    labs(title = "Association Between % Vaccination and Administration", x = "Percent
+         of 18+ Population Fully Vaccinated", y = "Ratio of Recieved/Admin Vaccines")
 
 #political vaccine map
 ggplot(ratio_map, aes(x = long, y = lat, group = group, fill = ratio_overall)) +
@@ -92,7 +93,8 @@ ggplot(ratio_map, aes(x = long, y = lat, group = group, fill = ratio_overall)) +
   new_scale_fill() +
   scale_fill_distiller(palette = "PuBu", direction = "horizantle", breaks=c(0.7,0.8,0.9), limits=c(0.6,0.95)) +
   geom_polygon(data = map_dem, color = "white", aes(x = long, y = lat, group = group, fill = ratio_overall)) +
-  labs(title = "Ratio of Vaccines Received to Vaccines Administered", subtitle = "Stratified by Politics (2020 Presidential Election Results)", fill = "Democratic Ratios") +
+  labs(title = "Ratio of Vaccines Received to Vaccines Administered", subtitle = "Stratified by Politics (2020 Presidential Election
+       Results)", fill = "Democratic Ratios") +
   theme(legend.position="bottom")
 
 #boxplot
@@ -101,7 +103,8 @@ ratios.boxplot <- ratios.2 %>%
 
 ggplot(ratios.boxplot, aes(x=politics, y=ratio_overall)) + 
   geom_boxplot(outlier.colour="blue", outlier.shape=8, outlier.size=4) +
-  labs(title = "Differential Vaccine Administration Ratios", subtitle = "Stratified by Politics (2020 Presidential Election Results)", y="Ratios of Doses Recieved to Administered", x = "2020 Election Results (Statewide)") +
+  labs(title = "Differential Vaccine Administration Ratios", subtitle = "Stratified by Politics (2020 Presidential Election Results)",
+       y="Ratios of Doses Recieved to Administered", x = "2020 Election Results (Statewide)") +
   geom_jitter(shape=16, position=position_jitter(0))
 ```
 
