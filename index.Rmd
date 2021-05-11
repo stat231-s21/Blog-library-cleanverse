@@ -73,7 +73,7 @@ You can embed a gif.
 
 ![ma example](https://raw.githubusercontent.com/stat231-s21/Blog-library-cleanverse/main/kriti/ma_example.gif)
 
-![usa vaccine number](kriti/usa_vaccine_number.gif)
+![usa vaccine number](https://raw.githubusercontent.com/stat231-s21/Blog-library-cleanverse/main/kriti/usa_vaccine_number.gif)
 
 
 # You can even create tabs if you want! {.tabset .tabset-fade .tabset-pills}
