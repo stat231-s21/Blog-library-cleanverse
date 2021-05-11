@@ -5,7 +5,7 @@ library(scales)
 library(viridis)
 
 # read in and plot ca vax over time
-ca_time <- read_csv("/Users/smolea/git/Blog-library-cleanverse/amaya/ca_time.csv") %>%
+ca_time <- read_csv("~blog_data/ca_time.csv") %>%
   filter(race != "Unknown")
 ca_tg <- ggplot(ca_time, aes(x = date, y = frac, colour = race)) +
   geom_line() +
