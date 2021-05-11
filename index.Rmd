@@ -1,7 +1,7 @@
 ---
-title: "Your Project Title Here"
-author: "Your Names Here"
-date: "Add a date"
+title: "COVID-19 Vaccinations in the United States: A Study"
+author: "Amaya Smole, Clara Page, Kriti Verma"
+date: "5/11/2021"
 output:
   rmdformats::readthedown:
     thumbnails: false
@@ -13,11 +13,11 @@ knitr::opts_chunk$set(echo = TRUE, fig.align="center")
 library(tidyverse)
 ```
 
-# Header 1
+# Comparisons: CA and TN
 
-## Header 2
+## Politics and Vaccination 
 
-### Header 3
+### Tracking Statewide Vaccinations
 
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For example, you can include **Bold** and _Italic_ and `Code` text.  For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
