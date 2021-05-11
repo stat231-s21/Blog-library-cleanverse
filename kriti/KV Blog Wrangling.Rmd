@@ -79,8 +79,8 @@ usa_vaccine_states <- kv_states %>%
   
 
 # IT'S WORKING!! after removed Alaska and Hawaii 
-anim_map <- usa_vaccine_states %>%
-  filter(state == "massachusetts") %>%
+anim_map_us <- usa_vaccine_states %>%
+  # filter(state == "massachusetts") %>%
 ggplot() +
  geom_polygon(aes(x = long, y = lat, group = group, fill = cumulative_vaccinations)
             ,color = "white") +
@@ -96,14 +96,14 @@ ggplot() +
  #transition_time(time = Day)
  transition_states(state = Day, transition_length=2
                   , state_length = 5)
-anim_map
+anim_map_us
 # number of days: 127
 #length(unique(kv_vaccine_states$Day))
 # why is this different? days: 104
 #length(unique(usa_vaccine_states$Day))
 #https://stackoverflow.com/questions/52332967/problem-with-many-50-states-in-gganimate
-animate(anim_map, nframes = 2*length(unique(usa_vaccine_states$Day))
-        , renderer = gifski_renderer("kriti/ma_example.gif"))
+animate(anim_map_us, nframes = 2*length(unique(usa_vaccine_states$Day))
+        , renderer = gifski_renderer("kriti/usa_vaccine_number.gif"))
 
 #anim_save() 
 
