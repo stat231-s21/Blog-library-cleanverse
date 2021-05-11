@@ -13,13 +13,11 @@ knitr::opts_chunk$set(echo = TRUE, fig.align="center")
 library(tidyverse)
 ```
 
-# Introduction
+# Project Description
 
-## Politics and Vaccination 
+## Introduction
 
-### Tracking Statewide Vaccinations
-
-#### Comparisons: CA and TN
+### Results
 
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For example, you can include **Bold** and _Italic_ and `Code` text.  For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
@@ -77,8 +75,7 @@ You can embed a gif.
 
 ![usa vaccine number](https://raw.githubusercontent.com/stat231-s21/Blog-library-cleanverse/main/kriti/usa_vaccine_number.gif)
 
-
-# You can even create tabs if you want! {.tabset .tabset-fade .tabset-pills}
+# Comparison: CA and TN {.tabset .tabset-fade .tabset-pills}
 
 ## Bulleted list
 
@@ -96,4 +93,8 @@ You can make a numbered list like this
 1. First thing I want to say
 2. Second thing I want to say
 3. Third thing I want to say
+
+# Politics and Vaccinations {.tabset .tabset-fade .tabset-pills}
+
+# Tracking Statewide Vaccinations {.tabset .tabset-fade .tabset-pills}
 

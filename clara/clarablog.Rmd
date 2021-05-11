@@ -54,7 +54,8 @@ ggplot(ratio_map, aes(x = long, y = lat, group = group
   coord_fixed(ratio = 1.3) +
   labs(fill = "Proportion of Delivered Shots That Were Administered") +
   theme(legend.position="bottom") +
-  scale_fill_distiller(palette = "BuPu", direction = "horizantle")
+  scale_fill_distiller(palette = "BuPu", direction = "horizantle") +
+  labs(title = "Ratio of Vaccines Received to Vaccines Administered", fill = "Ratio")
 
 
 #political map
