@@ -84,7 +84,7 @@ library(dplyr)
 library(readxl)
 library(scales)
 library(viridis)
-ca_time <- read_csv("/Users/smolea/git/Blog-library-cleanverse/amaya/ca_time.csv") %>%
+ca_time <- read_csv("ca_time.csv") %>%
   filter(race != "Unknown", race != "Other/Multiracial")
 ca_tg <- ggplot(ca_time, aes(x = date, y = frac, colour = race)) +
   geom_line() +
@@ -93,7 +93,7 @@ ca_tg <- ggplot(ca_time, aes(x = date, y = frac, colour = race)) +
   xlab("Date") + ylab("Proportion of Racial Group")
 ca_tg
 # read in and plot tn vax over time 
-tn_time <- read_csv("/Users/smolea/git/Blog-library-cleanverse/amaya/tn_time.csv") %>%
+tn_time <- read_csv("tn_time.csv") %>%
   filter(race != "UNKNOWN", race != "OTHER/MULTIRACIAL")
 tn_tg <- ggplot(tn_time, aes(x = date, y = frac, colour = race)) +
   geom_line() +
@@ -105,7 +105,7 @@ tn_tg
 
 
 # read in and plot ca county vaccinations
-ca_county <- read_csv("/Users/smolea/git/Blog-library-cleanverse/amaya/ca_county.csv") %>%
+ca_county <- read_csv("ca_county.csv") %>%
   mutate(subregion = tolower(county)) %>%
   select(-county)
 ca_counties <- map_data(map = "county", region = "california")
@@ -122,7 +122,7 @@ ggplot(ca_map, aes(x = long, y = lat, group = group, fill = total_vax)) +
 
 # read in and plot tn county vaccinations
 options(scipen = 999)
-tn_county <- read_csv("/Users/smolea/git/Blog-library-cleanverse/amaya/tn_county.csv") %>%
+tn_county <- read_csv("tn_county.csv") %>%
   mutate(subregion = tolower(COUNTY)) %>%
   select(-COUNTY)
 tn_counties <- map_data(map = "county", region = "tennessee")
