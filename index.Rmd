@@ -71,7 +71,9 @@ You can include [Links](https://www.datadreaming.org/post/r-markdown-theme-galle
 
 You can embed a gif.  
 
-![ma example](https://raw.githubusercontent.com/stat231-s21/Blog-library-cleanverse/main/kriti/ma_example.gif)
+![ma example](kriti/usa_vaccine_number.gif)
+
+![usa vaccine number](https://github.com/stat231-s21/Blog-library-cleanverse/blob/main/kriti/usa_vaccine_number.gif)
 
 
 # You can even create tabs if you want! {.tabset .tabset-fade .tabset-pills}
