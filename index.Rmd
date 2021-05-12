@@ -149,7 +149,11 @@ ggplot(ca_map, aes(x = long, y = lat, group = group, fill = total_vax)) +
   labs(fill = "Total Vaccinations") +
   scale_fill_viridis(direction = -1) +
   ggtitle("Vaccinations in California, Spring 2021")
+```
 
+The above graph shows the change in total vaccine doses in California between February 15 and April 15, 2021. I chose to analyze total doses instead of proportion of populations to demonstrate the incredibly high need for vaccine doses in highly populated areas, such as Los Angeles County (colored dark purple in the April 15 map). It appears that total doses administered falls highest in more populous counties, specifically those that encircle the Bay Area, Los Angeles, San Diego, Sacramento, and the Central Valley. If you look closely, you can see that the less populous counties saw a change in vaccine dosage between February 15 and April 15, but that that change is much smaller than the changes in populous areas. This can be explained by two main factors, the first (and most obvious) that vaccine counts should be lower where there are less people, and the second (and most important) that public health infrastructure in rural areas tends to be less thorough, presenting many access issues for agricultural communities, Native communities, elderly people, and other populations that live in rural areas.
+
+```{r, echo = FALSE, message = FALSE}
 # read in and plot tn county vaccinations
 options(scipen = 999)
 tn_county <- read_csv("tn_county.csv") %>%
