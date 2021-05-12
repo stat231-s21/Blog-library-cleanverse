@@ -11,6 +11,15 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, fig.align="center")
 library(tidyverse)
+library(rvest)
+library(dplyr)
+library(robotstxt)
+library(datasets)
+library(viridis)
+library(maps)
+library(leaflet)
+library(ggnewscale)
+library(gridExtra)
 ```
 
 # Project Description
@@ -157,6 +166,99 @@ You can make a numbered list like this
 3. Third thing I want to say
 
 # Politics and Vaccinations {.tabset .tabset-fade .tabset-pills}
+
+## R Markdown
+
+```{r}
+#read in
+ratios.1 <- read_csv("finalratios.csv")
+
+#quick updates to dataset
+ratios.2 <- ratios.1 %>%
+  select(-c(X1)) %>%
+  mutate(politics = case_when(dem_votes > rep_votes ~ "1", dem_votes < rep_votes ~ "0")) %>%
+  mutate(ratio_overall = admin/delivered) %>%
+  mutate(ratio_100 = admin_100/delivered_100)
+
+#data for maps
+usa_states <- map_data(map = "state", region = ".") 
+ratio_map <- ratios.2 %>%
+  right_join(usa_states, by = c("state" = "region"))
+
+map_dem <- ratio_map %>%
+  filter(politics != 0)
+map_rep <- ratio_map %>%
+  filter(politics != 1)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r, echo=FALSE}
+#overall vaccinated map
+vax_overall_map <- ggplot(ratio_map, aes(x = long, y = lat, group = group
+                      , fill = percent_full_18)) +
+  geom_polygon(color = "white") +
+  theme_void() +
+  coord_fixed(ratio = 1.3) +
+  theme(legend.position="bottom") +
+  theme(text = element_text(size = 7)) +
+  scale_fill_distiller(palette = "BuPu", direction = "horizantle") +
+  labs(title = "Percent of Adults Who Are Fully Vaccinated", fill = "Percent")
+
+
+#overall vaccine map
+ratio_overall_map <- ggplot(ratio_map, aes(x = long, y = lat, group = group
+                      , fill = ratio_overall)) +
+  geom_polygon(color = "white") +
+  theme_void() +
+  coord_fixed(ratio = 1.3) +
+  theme(legend.position="bottom") +
+  theme(text = element_text(size = 7)) +
+  scale_fill_distiller(palette = "BuPu", direction = "horizantle") +
+  labs(title = "Ratio of Vaccines Received to Vaccines Administered", fill = "Ratio")
+
+#combine
+grid.arrange(vax_overall_map, ratio_overall_map, ncol=2)
+
+#scatterplot
+ggplot(ratios.2, aes(x=percent_full_18, y=ratio_overall)) + 
+  geom_point() +
+  geom_smooth(method="lm", se=TRUE, fullrange=FALSE) +
+    labs(title = "Association Between % Vaccination and Administration", x = "Percent
+         of 18+ Population Fully Vaccinated", y = "Ratio of Recieved/Admin Vaccines")
+
+#political vaccine map
+ggplot(ratio_map, aes(x = long, y = lat, group = group, fill = ratio_overall)) +
+  coord_fixed(ratio = 1.3) +
+  #republican
+  geom_polygon(data = map_rep, color = "white") +
+  theme_void() +
+  labs(fill = "Republican Ratios") +
+  theme(legend.position="bottom") +
+  scale_fill_distiller(palette = "Reds", direction = "horizantle", breaks=c(0.7,0.8,0.9), limits=c(0.6,0.95)) +
+  #democrat
+  new_scale_fill() +
+  scale_fill_distiller(palette = "PuBu", direction = "horizantle", breaks=c(0.7,0.8,0.9), limits=c(0.6,0.95)) +
+  geom_polygon(data = map_dem, color = "white", aes(x = long, y = lat, group = group, fill = ratio_overall)) +
+  labs(title = "Ratio of Vaccines Received to Vaccines Administered", subtitle = "Stratified by Politics (2020 Presidential Election
+       Results)", fill = "Democratic Ratios") +
+  theme(legend.position="bottom")
+
+#boxplot
+ratios.boxplot <- ratios.2 %>%
+  mutate(politics = case_when(dem_votes > rep_votes ~ "Democrat", dem_votes < rep_votes ~ "Republican"))
+
+ggplot(ratios.boxplot, aes(x=politics, y=ratio_overall)) + 
+  geom_boxplot(outlier.colour="blue", outlier.shape=8, outlier.size=4) +
+  labs(title = "Differential Vaccine Administration Ratios", subtitle = "Stratified by Politics (2020 Presidential Election Results)",
+       y="Ratios of Doses Recieved to Administered", x = "2020 Election Results (Statewide)") +
+  geom_jitter(shape=16, position=position_jitter(0))
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
 
 # Tracking Statewide Vaccinations {.tabset .tabset-fade .tabset-pills}
 
