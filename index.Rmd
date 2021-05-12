@@ -151,7 +151,7 @@ ggplot(ca_map, aes(x = long, y = lat, group = group, fill = total_vax)) +
   ggtitle("Vaccinations in California, Spring 2021")
 ```
 
-The above graph shows the change in total vaccine doses in California between February 15 and April 15, 2021. I chose to analyze total doses instead of proportion of populations to demonstrate the incredibly high need for vaccine doses in highly populated areas, such as Los Angeles County (colored dark purple in the April 15 map). It appears that total doses administered falls highest in more populous counties, specifically those that encircle the Bay Area, Los Angeles, San Diego, Sacramento, and the Central Valley. If you look closely, you can see that the less populous counties saw a change in vaccine dosage between February 15 and April 15, but that that change is much smaller than the changes in populous areas. This can be explained by two main factors, the first (and most obvious) that vaccine counts should be lower where there are less people, and the second (and most important) that public health infrastructure in rural areas tends to be less thorough, presenting many access issues for agricultural communities, Native communities, elderly people, and other populations that live in rural areas.
+The above graph shows the change in total vaccine doses in California between February 15 and April 15, 2021. I chose to analyze total doses instead of proportion of populations to demonstrate the incredibly high need for vaccine doses in highly populated areas, such as Los Angeles County (colored dark purple in the April 15 map). It appears that total doses administered falls highest in more populous counties, specifically those that encircle the Bay Area, Los Angeles, San Diego, Sacramento, and the Central Valley. If you look closely, you can see that some less populous counties saw a change in vaccine dosage between February 15 and April 15, but that that change is much smaller than the changes in populous areas. This can be explained by three main factors, the first (and most obvious) that vaccine counts should be lower where there are less people, the second that rural areas tend to be more conservative and conservative populations tend to have more anti-vaccine individuals in them, and the third (and most important) that public health infrastructure in rural areas tends to be less thorough, presenting many access issues for agricultural communities, Native communities, elderly people, and other populations that live in rural areas.
 
 ```{r, echo = FALSE, message = FALSE}
 # read in and plot tn county vaccinations
@@ -172,6 +172,9 @@ ggplot(tn_map, aes(x = long, y = lat, group = group, fill = total_vax)) +
   scale_fill_viridis(direction = -1) +
   ggtitle("Vaccinations in Tennessee, Spring 2021")
 ```
+
+Lastly, the above graph shows the change in total vaccine doses in Tennessee between February 15 and April 15, 2021. It appears that total doses administered falls highest in more populous counties, specifically those that encircle Nashville, Memphis, Knoxville, and Chattanooga. Similar as to in California, it appears that less populous counties saw a small change in vaccine dosage between February 15 and April 15. This suggests that rural counties in Tennessee face challenges in administering vaccine doses to their populations that are similar to those in rural Californian counties. 
+
 
 ## Bulleted list
 
