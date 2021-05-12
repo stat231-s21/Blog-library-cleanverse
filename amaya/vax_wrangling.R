@@ -17,7 +17,12 @@ tn_vax <- read_excel("/Users/smolea/git/Blog-library-cleanverse/amaya/TN.covid.d
                           race == "OTHER/MULTIRACIAL" ~ count/271520.566,
                           race == "WHITE" ~ count/5387356.908,
                           race == "UNKNOWN" ~ 0,
-                          TRUE ~ count))
+                          TRUE ~ count)) %>%
+  mutate(Race = case_when(race == "ASIAN" ~ "Asian",
+                            race == "BLACK OR AFRICAN AMERICAN" ~ "Black/AfAm",
+                            race == "WHITE" ~ "Caucasian",
+                            TRUE ~ race
+                            ))
 # writing to csv
 write_csv(x = tn_vax, "/Users/smolea/git/Blog-library-cleanverse/tn_time.csv")
 tn <- ggplot(tn_vax, aes(x = date, y = frac, colour = race)) +
@@ -49,7 +54,12 @@ ca_vax <- read_csv("/Users/smolea/git/Blog-library-cleanverse/amaya/vaccine_demo
                           race == "Native Hawaiian or Other Pacific Islander" ~ count/142608.6,
                           race == "Asian" ~ count/5751880.2,
                           race == "Unknown" ~ 0,
-                          TRUE ~ count))
+                          TRUE ~ count)) %>%
+  mutate(Race = case_when(race == "American Indian or Alaska Native" ~ "Native American/Alaska Native",
+                          race == "Black or African American" ~ "Black/AfAm",
+                          race == "Native Hawaiian or Other Pacific Islander" ~ "Native Hawaiian/Pacific Islander",
+                          race == "White" ~ "Caucasian",
+                          TRUE ~ race))
 # writing to csv
 write_csv(x = ca_vax, "/Users/smolea/git/Blog-library-cleanverse/ca_time.csv")
 ca <- ggplot(ca_vax, aes(x = date, y = frac, colour = race)) +

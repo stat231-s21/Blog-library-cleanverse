@@ -86,33 +86,54 @@ You can embed a gif.
 
 # Comparison: CA and TN {.tabset .tabset-fade .tabset-pills}
 
-```{r}
+An issue central to policy response to the COVID-19 pandemic is how to efficiently, equitably, and safely administered vaccinations among subpopulations of a given country's citizens. Especially given the race-related events, movements, and justice and injustices in the past year, equitable vaccine distribution among racial groups is a very important, highly studied topic. Below, we will analyze vaccine administration by race in California and Tennessee, two historically partisan states, to see how well racially just policies and public health hopes are faring as they are put into practice. To calculate the proportion of racial groups, I scaled vaccine counts by racial subpopulations in California and Tennessee. 
+
+```{r, echo = FALSE, message = FALSE}
 # read in and plot ca vax over time
 library(tidyverse)
 library(dplyr)
 library(readxl)
 library(scales)
 library(viridis)
+library(ggpubr)
+library(ggplot2)
+
 ca_time <- read_csv("ca_time.csv") %>%
   filter(race != "Unknown", race != "Other/Multiracial")
-ca_tg <- ggplot(ca_time, aes(x = date, y = frac, colour = race)) +
+ca_tg <- ggplot(ca_time, aes(x = date, y = frac, colour = Race)) +
   geom_line() +
-  labs(colour = "Race", title = "Proportion of Racial Groups Vaccinated Over Time", 
-       subtitle = "California, 2021") +
-  xlab("Date") + ylab("Proportion of Racial Group")
-ca_tg
+  xlab("Date") + ylab("Proportion of Racial Group") +
+  theme(legend.position = "bottom") +
+  theme(legend.title = element_blank())
 # read in and plot tn vax over time 
 tn_time <- read_csv("tn_time.csv") %>%
   filter(race != "UNKNOWN", race != "OTHER/MULTIRACIAL")
-tn_tg <- ggplot(tn_time, aes(x = date, y = frac, colour = race)) +
+tn_tg <- ggplot(tn_time, aes(x = date, y = frac, colour = Race)) +
   geom_line() +
-  labs(colour = "Race", title = "Proportion of Racial Groups Vaccinated Over Time", 
-       subtitle = "Tennessee, 2021") +
-  xlab("Date") + ylab("Proportion of Racial Group")
-tn_tg
+  xlab("Date") + ylab("Proportion of Racial Group")+
+  theme(legend.position = "bottom") +
+  theme(legend.title = element_blank())
+# use ggarrange() to plot side by side
+figure <- annotate_figure(ggarrange(ca_tg, tn_tg,
+                   widths = c(1.35,1),
+                   labels = c("California, 2021", 
+                              "Tennessee, 2021"),
+                   ncol = 2, nrow = 1),
+                   top = text_grob("Proportion of Racial Groups Vaccinated Over Time", face = "bold", size = 18))
+figure
+```
+
+Unfortunately, the datasets available on California and Tennessee vaccinations had different racial categories and fineness thereof. Regardless, there are important conclusions to draw from the data. It is clear that in both California and Tennessee, Black Americans received COVID-19 vaccinations at the lowest rate. This trend began from the beginning of vaccine administration in both cases, demonstrating a clear racial inequity for this group. 
+
+Similarly, most other groups of people of color in California were vaccinated at rates below Caucasian Californians (except for Asian Californians and Native Hawaiian/Pacific Islander Californians). This suggests that Black and Brown communities encounter barriers to receiving vaccinations. Asian Californians appear to receive vaccines at similar rates to Caucasian Californians, which suggests a possibly less stark set of systemic barriers keeping Asian Californians from accessing the COVID-19 vaccine. Lastly, Native Hawaiian or Pacific Islander Californians appear to have consistently received the COVID-19 vaccine from the start. One theory for this occurrence is that Native Hawaiians whose tribal status is federally or regionally recognized may be able to receive the COVID-19 vaccine more easily via Indian Health Service vaccination clinics. However, this theory does not align with the low rates that non-Hawaiian Natives appear to be receiving vaccines.
+
+In Tennessee, we also see a similar vaccination rate between Asian Tennesseeans and Caucasian Tennesseeans. This also suggests that Asian Tennesseeans encounter less stark systemic race-related barriers to COVID-19 vaccination. However, Black Tennesseeans appear to receive COVID-19 vaccinations at lower rates than their non-Black counterparts, which suggests that vaccine distribution between Black and non-Black communities in Tennessee is not equitable.
+
+Lastly, it is important to note that in general, the overall vaccination rates in Tennessee are higher than in California. I theorize that this is because the Tennessee dataset did not specify whether vaccine counts meant fully vaccinated persons or vaccine doses administered, whereas the California dataset supplied counts of fully vaccinated persons. Since the overall purpose of this visualization was to compare rates between racial groups, and I believe that it is a fair assumption to say that racial groups and vaccine type (i.e. one-dose series or two-dose series) are not confounded, I hope that you all will find this visualization adequate.
 
 
 
+```{r, echo = FALSE, message = FALSE}
 # read in and plot ca county vaccinations
 ca_county <- read_csv("ca_county.csv") %>%
   mutate(subregion = tolower(county)) %>%
@@ -127,8 +148,12 @@ ggplot(ca_map, aes(x = long, y = lat, group = group, fill = total_vax)) +
   facet_wrap(~administered_date) +
   labs(fill = "Total Vaccinations") +
   scale_fill_viridis(direction = -1) +
-  ggtitle("Vaccinations in California, Spring 2021")
+  ggtitle("COVID-19 Vaccinations in California, Spring 2021")
+```
 
+The above graph shows the change in total vaccine doses in California between February 15 and April 15, 2021. I chose to analyze total doses instead of proportion of populations to demonstrate the incredibly high need for vaccine doses in highly populated areas, such as Los Angeles County (colored dark purple in the April 15 map). It appears that total doses administered falls highest in more populous counties, specifically those that encircle the Bay Area, Los Angeles, San Diego, Sacramento, and the Central Valley. If you look closely, you can see that some less populous counties saw a change in vaccine dosage between February 15 and April 15, but that that change is much smaller than the changes in populous areas. This can be explained by three main factors, the first (and most obvious) that vaccine counts should be lower where there are less people, the second that rural areas tend to be more conservative and conservative populations tend to have more anti-vaccine individuals in them, and the third (and most important) that public health infrastructure in rural areas tends to be less thorough, presenting many access issues for agricultural communities, Native communities, elderly people, and other populations that live in rural areas.
+
+```{r, echo = FALSE, message = FALSE}
 # read in and plot tn county vaccinations
 options(scipen = 999)
 tn_county <- read_csv("tn_county.csv") %>%
@@ -142,11 +167,14 @@ ggplot(tn_map, aes(x = long, y = lat, group = group, fill = total_vax)) +
   geom_polygon(colour = "white") +
   theme_void() +
   coord_fixed(ratio = 1.3) +
-  facet_wrap(~date) +
+  facet_wrap(~date, nrow = 2) +
   labs(fill = "Total Vaccinations") +
   scale_fill_viridis(direction = -1) +
-  ggtitle("Vaccinations in Tennessee, Spring 2021")
+  ggtitle("COVID-19 Vaccinations in Tennessee, Spring 2021")
 ```
+
+Lastly, the above graph shows the change in total vaccine doses in Tennessee between February 15 and April 15, 2021. It appears that total doses administered falls highest in more populous counties, specifically those that encircle Nashville, Memphis, Knoxville, and Chattanooga. Similar as to in California, it appears that less populous counties saw a small change in vaccine dosage between February 15 and April 15. This suggests that rural counties in Tennessee face challenges in administering vaccine doses to their populations that are similar to those in rural Californian counties. 
+
 
 ## Bulleted list
 
