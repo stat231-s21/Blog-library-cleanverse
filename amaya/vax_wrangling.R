@@ -20,7 +20,7 @@ tn_vax <- read_excel("/Users/smolea/git/Blog-library-cleanverse/amaya/TN.covid.d
                           TRUE ~ count)) %>%
   mutate(Race = case_when(race == "ASIAN" ~ "Asian",
                             race == "BLACK OR AFRICAN AMERICAN" ~ "Black/AfAm",
-                            race == "WHITE" ~ "Caucasian/White",
+                            race == "WHITE" ~ "Caucasian",
                             TRUE ~ race
                             ))
 # writing to csv
@@ -55,10 +55,10 @@ ca_vax <- read_csv("/Users/smolea/git/Blog-library-cleanverse/amaya/vaccine_demo
                           race == "Asian" ~ count/5751880.2,
                           race == "Unknown" ~ 0,
                           TRUE ~ count)) %>%
-  mutate(Race = case_when(race == "American Indian or Alaska Native" ~ "Native American/Alaskan",
+  mutate(Race = case_when(race == "American Indian or Alaska Native" ~ "Native American/Alaska Native",
                           race == "Black or African American" ~ "Black/AfAm",
-                          race == "Native Hawaiian or Other Pacific Islander" ~ "Pacific Islander",
-                          race == "White" ~ "Caucasian/White",
+                          race == "Native Hawaiian or Other Pacific Islander" ~ "Native Hawaiian/Pacific Islander",
+                          race == "White" ~ "Caucasian",
                           TRUE ~ race))
 # writing to csv
 write_csv(x = ca_vax, "/Users/smolea/git/Blog-library-cleanverse/ca_time.csv")
