@@ -82,7 +82,7 @@ You can embed a gif.
 
 ![ma example](https://raw.githubusercontent.com/stat231-s21/Blog-library-cleanverse/main/kriti/ma_example.gif)
 
-![usa vaccine number](https://raw.githubusercontent.com/stat231-s21/Blog-library-cleanverse/main/kriti/usa_vaccine_number.gif)
+
 
 # Comparison: CA and TN {.tabset .tabset-fade .tabset-pills}
 
@@ -289,4 +289,40 @@ Note that the `echo = FALSE` parameter was added to the code chunk to prevent pr
 
 
 # Tracking Statewide Vaccinations {.tabset .tabset-fade .tabset-pills}
+
+A large question surrounding the vaccines administered, is how that number has changed overtime in the United States. Before the eligibility guidelines were lifted, it was at each state's discretion which groups were eligible to get vaccinated. Because not all states had the same restrictions, depending on where someone lived, they could get vaccinated earlier than someone else who lived in a different state. Naturally, this led to a question of whether some states were giving more vaccinations per day, which could mean that they were in a position to expand their eligibility of who was able to get vaccinated. So, I decided to make a timelapse of a statewide map of the United States measuring the change overtime of each states number of vaccinations given per day. 
+
+![The Shift in Number of Vaccines Delivered Across the United States ](https://raw.githubusercontent.com/stat231-s21/Blog-library-cleanverse/main/kriti/usa_vaccine_number.gif)
+
+
+Here is a link to a shiny app where one can look at vaccine trends in the United States as a line graph:
+
+
+
+
+```{r, eval = FALSE}
+usa_states <- map_data(map = "state", region = ".") 
+
+# using inner_join to remove alaska & hawaii
+usa_vaccine_states <- kv_states %>%
+  inner_join(usa_states, by = c("state" = "region"))
+  
+anim_map_us <- usa_vaccine_states %>%
+ggplot() +
+ geom_polygon(aes(x = long, y = lat, group = group, fill = cumulative_vaccinations)
+            ,color = "white") +
+ theme_void() +
+ coord_fixed(ratio = 1.3) +
+ labs(fill = "Number of People Vaccinated"
+      , title = "USA Daily Vaccinations by State"
+      , subtitle = "{closest_state}"
+  theme(legend.position="right") +
+  scale_fill_distiller(palette = "YlGnBu", direction = "horizantle") +
+  transition_states(state = Day, transition_length=2
+                  , state_length = 5)
+anim_map_us
+animate(anim_map_us, nframes = 2*length(unique(usa_vaccine_states$Day))
+        , renderer = gifski_renderer("kriti/usa_vaccine_number.gif"))
+```
+
 
