@@ -7,7 +7,7 @@ library(ggrepel)
 ###############
 # import data #
 ###############
-kv_data <- read_csv("us-daily-covid-vaccine-doses-administeredpopstate.csv")
+kv_data <- read_csv("us-daily-covid-vaccine-doses-administeredpopstate.csv") 
 
 
 #############################################################
