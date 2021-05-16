@@ -32,13 +32,13 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
 ```{r}
-kv_vaccine_states <- read_csv("us-total-covid-19-vaccine-doses-administered_final.csv")
+kv_vaccine_states <- read_csv("us-daily-covid-vaccine-doses-administered_final.csv")
 
 states <- c("Alabama",
 "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida",
 "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana",
 "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri",
-"Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York State", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island",
+"Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island",
 "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia",
 "Washington", "West Virginia", "Wisconsin", "Wyoming")
 
@@ -75,7 +75,8 @@ usa_states <- map_data(map = "state", region = ".")
 
 # changing from left_join to inner_join to remove alaska & hawaii
 usa_vaccine_states <- kv_states %>%
-  inner_join(usa_states, by = c("state" = "region"))
+  inner_join(usa_states, by = c("state" = "region")) %>%
+  filter(state %in% "florida")
   
 
 # IT'S WORKING!! after removed Alaska and Hawaii 
@@ -102,9 +103,39 @@ anim_map_us
 #length(unique(usa_vaccine_states$Day))
 #https://stackoverflow.com/questions/52332967/problem-with-many-50-states-in-gganimate
 animate(anim_map_us, nframes = 2*length(unique(usa_vaccine_states$Day))
-        , renderer = gifski_renderer("kriti/usa_vaccine_number_all_total_states.gif"))
+        , renderer = gifski_renderer("usavaccines.gif"))
 
-#anim_save() 
+
+
+
+
+
+#percent plot
+
+anim_map_perc <- usa_vaccine_states %>%
+ggplot() +
+ geom_polygon(aes(x = long, y = lat, group = group, fill = percentpop)
+            ,color = "white") +
+ theme_void() +
+ coord_fixed(ratio = 1.3) +
+ labs(fill = "USA Daily Vaccinations as a Percent of Population"
+      , title = "Daily Vaccinations as a Percent of Population"
+      , subtitle = "{closest_state}") +
+      #,  subtitle="{format(frame_time, '%m/%d/%y')}"
+    
+  theme(legend.position="right") +
+  scale_fill_distiller(palette = "YlGnBu", direction = "horizantle")+#, limits = c(0,30000000)) +
+ #transition_time(time = Day)
+ transition_states(state = Day, transition_length=2
+                  , state_length = 5)
+anim_map_perc
+# number of days: 127
+#length(unique(kv_vaccine_states$Day))
+# why is this different? days: 104
+#length(unique(usa_vaccine_states$Day))
+#https://stackoverflow.com/questions/52332967/problem-with-many-50-states-in-gganimate
+animate(anim_map_perc, nframes = 2*length(unique(usa_vaccine_states$Day))
+        , renderer = gifski_renderer("florida2.gif"))
 
  
 ```
