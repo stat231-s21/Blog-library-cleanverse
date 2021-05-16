@@ -32,13 +32,13 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
 ```{r}
-kv_vaccine_states <- read_csv("kriti/us-daily-covid-vaccine-doses-administeredpopstate.csv")
+kv_vaccine_states <- read_csv("us-total-covid-19-vaccine-doses-administered_final.csv")
 
 states <- c("Alabama",
 "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida",
 "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana",
 "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri",
-"Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island",
+"Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York State", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island",
 "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia",
 "Washington", "West Virginia", "Wisconsin", "Wyoming")
 
@@ -71,7 +71,7 @@ kv_states <- kv_vaccine_states %>%
 
 ```{r}
 usa_states <- map_data(map = "state", region = ".") 
-#head(usa_states)
+
 
 # changing from left_join to inner_join to remove alaska & hawaii
 usa_vaccine_states <- kv_states %>%
@@ -80,7 +80,6 @@ usa_vaccine_states <- kv_states %>%
 
 # IT'S WORKING!! after removed Alaska and Hawaii 
 anim_map_us <- usa_vaccine_states %>%
-  # filter(state == "massachusetts") %>%
 ggplot() +
  geom_polygon(aes(x = long, y = lat, group = group, fill = cumulative_vaccinations)
             ,color = "white") +
@@ -88,9 +87,9 @@ ggplot() +
  coord_fixed(ratio = 1.3) +
  labs(fill = "Number of People Vaccinated"
       , title = "USA Daily Vaccinations by State"
-      , subtitle = "{closest_state}"
+      , subtitle = "{closest_state}") +
       #,  subtitle="{format(frame_time, '%m/%d/%y')}"
-      , caption = "Kriti Verma") +
+    
   theme(legend.position="right") +
   scale_fill_distiller(palette = "YlGnBu", direction = "horizantle")+#, limits = c(0,30000000)) +
  #transition_time(time = Day)
@@ -103,7 +102,7 @@ anim_map_us
 #length(unique(usa_vaccine_states$Day))
 #https://stackoverflow.com/questions/52332967/problem-with-many-50-states-in-gganimate
 animate(anim_map_us, nframes = 2*length(unique(usa_vaccine_states$Day))
-        , renderer = gifski_renderer("kriti/usa_vaccine_number_all_states.gif"))
+        , renderer = gifski_renderer("kriti/usa_vaccine_number_all_total_states.gif"))
 
 #anim_save() 
 
