@@ -26,63 +26,17 @@ library(gridExtra)
 
 ## Introduction
 
-### Results
+It's no secret that COVID-19 has dramatically changed our lives over the course of the past year. It's only recently, as vaccines have started to become available, that society has begun to return to normal. 
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For example, you can include **Bold** and _Italic_ and `Code` text.  For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+When we sat down to discuss what to study, we were all drawn to the dramatic impact of vaccinations. And although different aspects of the issue, ranging from differential state effects, to political correlations, to adaptations over time, caught our attention, it was clear that we wanted to study vaccination data. We thought we'd turn to the United States, as our previous project had a more international focus. 
 
-You should test out updating your GitHub Pages website:
+Once we'd settled on a topic, we began to look for data sources. In the end, we ended up with six datasets. The first two focused on state level vaccination data, in California and Tennessee respectively. In a similar vein, there was a dataset that contained information about Tennessee on a county-wide level. The next two were more general, containing basic information about doses administered over time: one was from the CDC, one was from our world in data. Finally, we used a dataset from the MIT Elections Lab to learn about past political results. 
 
-- clone your group's blog project repo in RStudio
-- update "Your Project Title Here" to a new title in the YAML header
-- knit `index.Rmd` 
-- commit and push BOTH the `index.Rmd` and the `index.html` files
-- go to https://stat231-s21.github.io/Blog-library-cleanverse/ to see the published test document (this is publicly available!)
+From there, we moved to analysis. That work was broken into three main sections. They are all easily accessible via tabs on the left-hand side of your screen. Enjoy!
 
-## Including code and plots
+## Results
 
-You can embed code as normal, for example:
-
-```{r cars}
-summary(cars)
-```
-
-Let's clean up the format of that output:
-
-```{r pretty, echo=FALSE, warning=FALSE, message=FALSE, eval=FALSE}
-library(kableExtra)
-summary(cars) %>%
-  kable(col.names = c("Speed", "Distance")
-        , row.names = F) %>%
-  kable_styling(bootstrap_options = "striped"
-                , full_width = F) %>%
-  row_spec(0, bold = T, underline = T) %>%
-  column_spec(1:2, width = "1.5in") 
-```
-
-In a study from the 1920s, fifty cars were used to see how the speed of the car and the distance taken to stop were related.  Speeds ranged between `r min(cars$speed)` and `r max(cars$speed)` mph.  Distances taken to stop ranged between `r min(cars$dist)` and `r max(cars$dist)` feet, with the middle 50% falling between `r as.numeric(quantile(cars$dist)[2])` and `r as.numeric(quantile(cars$dist)[4])` feet.  
-
-You can also embed plots as normal, for example:
-
-```{r figure1, echo=FALSE}
-ggplot(data = cars, aes(x = speed, y = dist)) + 
-  geom_point() + 
-  labs(x = "Speed of car (mph)"
-       , y = "Distance taken to stop (ft)"
-       , title = "cars data (1920s)")
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
-
-
-## Including links and images
-
-You can include [Links](https://www.datadreaming.org/post/r-markdown-theme-gallery/) and images ![team logo](https://raw.githubusercontent.com/stat231-s21/Blog-library-cleanverse/main/images/s1g6-publichealth.png?token=AGMTX5XTR6OSIG2YBI4FWT3AOVTZU)
-
-You can embed a gif.  
-
-![ma example](https://raw.githubusercontent.com/stat231-s21/Blog-library-cleanverse/main/kriti/ma_example.gif)
-
-
+In the end, we discovered several interesting patterns with regard to vaccination in the United States. 
 
 # Comparison: CA and TN {.tabset .tabset-fade .tabset-pills}
 
@@ -176,28 +130,29 @@ ggplot(tn_map, aes(x = long, y = lat, group = group, fill = total_vax)) +
 Lastly, the above graph shows the change in total vaccine doses in Tennessee between February 15 and April 15, 2021. It appears that total doses administered falls highest in more populous counties, specifically those that encircle Nashville, Memphis, Knoxville, and Chattanooga. Similar as to in California, it appears that less populous counties saw a small change in vaccine dosage between February 15 and April 15. This suggests that rural counties in Tennessee face challenges in administering vaccine doses to their populations that are similar to those in rural Californian counties. 
 
 
-## Bulleted list
-
-You can make a bulleted list like this:
-
-- item 1
-- item 2
-- item 3
-
-
-## Numbered list
-
-You can make a numbered list like this
-
-1. First thing I want to say
-2. Second thing I want to say
-3. Third thing I want to say
-
 # Politics and Vaccinations {.tabset .tabset-fade .tabset-pills}
 
-## R Markdown
+## Data and Methods
 
-```{r}
+Much has been made of the possible correlation between political inclination and vaccine hesitancy, a phenomenon where people refuse to get their COVID-19 vaccination shot, even though the innoculation has been proven sound from a medical perspective. Articles such as [this](https://fortune.com/2021/04/23/nobody-was-coming-these-red-states-are-turning-down-vaccines-as-demand-plummets/) one from Fortune Magazine and [this](https://www.nytimes.com/interactive/2021/04/17/us/vaccine-hesitancy-politics.html) one from the New York Times allege that Trump voters and, to some extent, Republicans, are more likely to refuse vaccination. 
+
+To visualize this idea, I drew from two data sources. First, I relied on the CDC's vaccination records. I was comfortable with the reliability of that source. I also drew from the MIT Election Lab, which provided me a comprehensive list of state's voting records, including during the 2020 presidential election, which I was most interested in. 
+
+From there, it was a matter of data-wrangling: I merged the two datasets, selected the variables I was going to use, and created the required new variables. The first of these was a ratio of vaccines delivered vs. administered, per state. The second was an indicator variable, which allowed me to see how a state voted in 2020 (Trump vs. Biden). 
+
+After that, it was a matter of visualization. I proceeded in four steps. 
+
+1.  Look at the big picture. For this, I made a map of state-level vaccination administration ratios, then compared it to a map that showed the percentage of people vaccinated. 
+
+2.  The above convinced me of the importance of understanding what leads to low administration ratios, as much of the time, that appeared to be a barrier to achieving high levels of per-capita vaccination. To confirm this inkling, I turned to a scatterplot. Once satisfied there, I decided to see if my factor of interest, politics, could play a role. 
+
+3.  I created a map of the United States, colored by politics, then shaded by ratio. I thought I saw a clear trend towards Republican states being worse at administering the vaccines they were given, but I wasn't to investigate further. 
+
+4.  Looking at a boxplot, I confirmed my visual assumption: Republican states had a much lower median ratio. 
+
+These steps, and conclusions, are described in more detail below. 
+
+```{r claradata, echo=FALSE, warning=FALSE, message=FALSE}
 #read in
 ratios.1 <- read_csv("finalratios.csv")
 
@@ -219,11 +174,11 @@ map_rep <- ratio_map %>%
   filter(politics != 1)
 ```
 
-## Including Plots
+## Initial Maps, Scatterplot
 
-You can also embed plots, for example:
+Below are the first two visualizations I created, meant to justify my investigation of politcal impacts on vaccination ratios.
 
-```{r, echo=FALSE}
+```{r maps, echo=FALSE, warning=FALSE, message=FALSE}
 #overall vaccinated map
 vax_overall_map <- ggplot(ratio_map, aes(x = long, y = lat, group = group
                       , fill = percent_full_18)) +
@@ -256,7 +211,12 @@ ggplot(ratios.2, aes(x=percent_full_18, y=ratio_overall)) +
   geom_smooth(method="lm", se=TRUE, fullrange=FALSE) +
     labs(title = "Association Between % Vaccination and Administration", x = "Percent
          of 18+ Population Fully Vaccinated", y = "Ratio of Recieved/Admin Vaccines")
+```
 
+
+## Political Map, Boxplot
+
+```{r political, echo=FALSE, warning=FALSE, message=FALSE}
 #political vaccine map
 ggplot(ratio_map, aes(x = long, y = lat, group = group, fill = ratio_overall)) +
   coord_fixed(ratio = 1.3) +
@@ -285,9 +245,6 @@ ggplot(ratios.boxplot, aes(x=politics, y=ratio_overall)) +
   geom_jitter(shape=16, position=position_jitter(0))
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
-
-
 # Tracking Statewide Vaccinations {.tabset .tabset-fade .tabset-pills}
 
 A large question surrounding the vaccines administered, is how that number has changed overtime in the United States. Before the eligibility guidelines were lifted, it was at each state's discretion which groups were eligible to get vaccinated. Because not all states had the same restrictions, depending on where someone lived, they could get vaccinated earlier than someone else who lived in a different state. Naturally, this led to a question of whether some states were giving more vaccinations per day, which could mean that they were in a position to expand their eligibility of who was able to get vaccinated. So, I decided to make a timelapse of a statewide map of the United States measuring the change overtime of each states number of vaccinations given per day. 
@@ -296,9 +253,6 @@ A large question surrounding the vaccines administered, is how that number has c
 
 
 Here is a link to a shiny app where one can look at vaccine trends in the United States as a line graph:
-
-
-
 
 ```{r, eval = FALSE}
 usa_states <- map_data(map = "state", region = ".") 
