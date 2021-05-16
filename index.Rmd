@@ -245,22 +245,38 @@ ggplot(ratios.boxplot, aes(x=politics, y=ratio_overall)) +
   geom_jitter(shape=16, position=position_jitter(0))
 ```
 
+
+
 # Tracking Statewide Vaccinations {.tabset .tabset-fade .tabset-pills}
 
-A large question surrounding the vaccines administered, is how that number has changed overtime in the United States. Before the eligibility guidelines were lifted, it was at each state's discretion which groups were eligible to get vaccinated. Because not all states had the same restrictions, depending on where someone lived, they could get vaccinated earlier than someone else who lived in a different state. Naturally, this led to a question of whether some states were giving more vaccinations per day, which could mean that they were in a position to expand their eligibility of who was able to get vaccinated. So, I decided to make a timelapse of a statewide map of the United States measuring the change overtime of each states number of vaccinations given per day. 
+When vaccines were first starting to be administered, each state had their own guidelines for eligibility, meaning who was allowed to get vaccinated. Most states started with first-line-responses, such as doctors, nurses, and other medical workers. Then, they expanded to the state's most vulnerable populations, and continued to extend the guidelines, using age, occupation, and preexisting health conditions as a marker for who would be allowed to get vaccinated. Each state followed a similar process, and each state was allocated a certain number of vaccine doses each week, the amount proportionate to their population. 
 
-![The Shift in Number of Vaccines Delivered Across the United States ](https://raw.githubusercontent.com/stat231-s21/Blog-library-cleanverse/main/kriti/usa_vaccine_number_all_states.gif)
-As we can see here, California, Texas, and Florida stand out as the states that administer a larger amount of vaccines per day, as they get shaded a darker blue much faster than the other states do. If we want to see which states  Additionally, looking at the map regionally, part of the mid-west and north-west, especially North Dakota and Wyoming, along with Maine and West Virginia have the lowest number of vaccinations given on a daily basis. 
+However, we see that some states opened up their guidelines much faster than other states. For instance, on one side of the spectrum, New Jersey was one of the last states to open up vaccine eligibility to everyone 16 and older, on April 19th. On the other side, Alaska, Alabama, and Arkansas opened up on March 9th, March 24th, and March 30th, respectively (US News).
 
-Here is a link to a shiny app where one can look at vaccine trends in the United States as a line graph:
+This led me to my main questions of: 
+
+1.    How did each state differ in the number of doses they were administering each day? 
+
+2.    Are some states vaccinating their populations at a faster rate than other states?
+
+
+To answer these questions, I decided to make a time lapse of the United States measuring the cumulative number of doses that were given overtime in each state. I started January 13th, and went up to May 15th of 2021, cumulatively adding the number of doses given each day in each state. 
+
+For instance, if on January 13th, there were 13361 doses given in Massachusetts, and 14697 doses given on January 14th in Massachusetts, the number that I measured for January 13th would be 13361 and the number that I measured for January 14th would be 13361 + 14697 = 28058. 
+
+Below is the main code that I used to make the time lapse visualization. First, I merged the vaccine dataset that I created (kv_states) with the usa_states dataset which contains the information to make a map of the United States. Then, I mapped that new dataset, called usa_vaccine_states, and used gganimate to bring it from a static map to a timelapse.
+
 
 ```{r, eval = FALSE}
 usa_states <- map_data(map = "state", region = ".") 
 
+# merging the US map dataset with the vaccine dataset
 # using inner_join to remove alaska & hawaii
 usa_vaccine_states <- kv_states %>%
   inner_join(usa_states, by = c("state" = "region"))
-  
+
+
+#animate the map to become a time lapse/gif  
 anim_map_us <- usa_vaccine_states %>%
 ggplot() +
  geom_polygon(aes(x = long, y = lat, group = group, fill = cumulative_vaccinations)
@@ -272,11 +288,51 @@ ggplot() +
       , subtitle = "{closest_state}"
   theme(legend.position="right") +
   scale_fill_distiller(palette = "YlGnBu", direction = "horizantle") +
+    
+  # using gganimate's transition_states to inform how the map should move
   transition_states(state = Day, transition_length=2
                   , state_length = 5)
 anim_map_us
+
+#adjusting the number of frames to cycle through in order to cycle through all of the dates
 animate(anim_map_us, nframes = 2*length(unique(usa_vaccine_states$Day))
         , renderer = gifski_renderer("kriti/usa_vaccine_number.gif"))
 ```
+
+
+Here is the result:
+
+![Cumulative Number of Vaccine Doses Delivered by State ](https://raw.githubusercontent.com/stat231-s21/Blog-library-cleanverse/main/kriti/usavaccinesfinal.gif)
+
+As we see on the time lapse, it seems that California, Texas, Florida, and New York consistently delivered the most vaccine doses from the beginning of the vaccine rollout. For instance, on January 18th, these states had begun to turn green, while the other states were still yellow.
+
+
+#insert pic of Jan 18
+
+
+
+
+
+And, the trend continues throughout the time lapse as well. As we start to see how the other states' cumulative number of vaccine doses given changes from January to May, we can see that in general, the right half of the country seems to be on the upper side of the scale, while the left half of the country is on the lower end of the scale.
+
+
+However, it's important to note that while California, Texas, Florida, and New York have the most vaccine doses given, they also have the biggest populations. Because they have the biggest populations, it makes sense that they would get a larger number of doses allocated to them, which means that they would give a larger number of doses each day, meaning their cumulative number of vaccine doses given will be very high. 
+
+So, in order to be as accurate as possible in my conclusions (and answer my second question), I decided to make another map that tracked the cumulative number of vaccine doses given as a percent of state population. That way, I could account for the population when measuring how fast each state was vaccinating their populations. That way, a lower populated state would not be overshadowed by larger states if the proportion of cumulative vaccine doses given was the same as a larger state, even if the raw number was much lower.
+
+In order to do this, I created a new column that took the cumulative number of vaccines for each day, and divided it by the state population for each day in each state.
+
+While I was expecting to see an evening out of the map, I was surprised to see how much the map standardized. In the previous map, measuring the number of vaccinations, the map had states from all different places on the scale. However, in the second map, all of the states were a shade of dark blue, which meant that their cumulative numbers of vaccines doses given as a percent of population were all close to each other, and close to the higher end of the scale. 
+
+As a limitation, I would like to note that this map is measuring the cumulative number of vaccine doses administered as a percent of population, and does not necessarily accurately reflect the number of people fully/partially vaccinated. The data I used only had the number of vaccine doses given per day, and since Pfizer-BioNTech and Moderna require 2 doses to be fully vaccinated, while Johnson and Johnson only requires one shot, I did not have a way to extract information needed to measure the number of people fully/partially vaccinated in each state. I do think it would be extremely informative to have a map that did have the number of people fully vaccinated as a measurement. 
+
+Lastly, I created a shiny app that represented the same information in line graph form, so that someone can more easily compare vaccine doses given within different states. 
+
+
+
+
+Here is a [this](https://fortune.com/2021/04/23/nobody-was-coming-these-red-states-are-turning-down-vaccines-as-demand-plummets/) to a shiny app where one can look at vaccine trends in the United States as a line graph:
+
+
 
 
