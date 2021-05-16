@@ -292,8 +292,8 @@ Note that the `echo = FALSE` parameter was added to the code chunk to prevent pr
 
 A large question surrounding the vaccines administered, is how that number has changed overtime in the United States. Before the eligibility guidelines were lifted, it was at each state's discretion which groups were eligible to get vaccinated. Because not all states had the same restrictions, depending on where someone lived, they could get vaccinated earlier than someone else who lived in a different state. Naturally, this led to a question of whether some states were giving more vaccinations per day, which could mean that they were in a position to expand their eligibility of who was able to get vaccinated. So, I decided to make a timelapse of a statewide map of the United States measuring the change overtime of each states number of vaccinations given per day. 
 
-![The Shift in Number of Vaccines Delivered Across the United States ](https://raw.githubusercontent.com/stat231-s21/Blog-library-cleanverse/main/kriti/usa_vaccine_number.gif)
-
+![The Shift in Number of Vaccines Delivered Across the United States ](https://raw.githubusercontent.com/stat231-s21/Blog-library-cleanverse/main/kriti/usa_vaccine_number_all_states.gif)
+As we can see here, California, Texas, and Florida stand out as the states that administer a larger amount of vaccines per day, as they get shaded a darker blue much faster than the other states do. If we want to see which states  Additionally, looking at the map regionally, part of the mid-west and north-west, especially North Dakota and Wyoming, along with Maine and West Virginia have the lowest number of vaccinations given on a daily basis. 
 
 Here is a link to a shiny app where one can look at vaccine trends in the United States as a line graph:
 
