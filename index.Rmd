@@ -266,7 +266,15 @@ ggplot(ratios.boxplot, aes(x=politics, y=ratio_overall)) +
   geom_jitter(shape=16, position=position_jitter(0))
 ```
 
+To visualize the above information in another way, we can look at the above boxplot. Visual color patterns are a good indicator of what's happening, but this is a simplified diagram, that allows us to compare empirical numbers. 
 
+The pattern on the map is dramatically pronounced here. The median rate of vaccination administration for states that voted for Joe Biden in 2020 is around 0.825. The median level for states that voted for Donald Trump is around 0.755. That's almost a 10% difference (0.07, to be exact). 
+
+To summarize, then: we have evidence that one of the major factors impacting the speed at which states can vaccinate their populations is their ability to use all of the vaccine doses they're given. One underlying factor there is whether people are actually willing to be inoculated. You can't use all your shots if much of your population doesn't want them. 
+
+The final bit of analysis showed that one reason people don't want doses is possibly because of their political inclination. We can see on a statewide level, that likely had an effect. There's certainly a difference in medians when stratified by voting history. 
+
+The one outlier is Georgia, which is notably historically Republican, and flipped this election. 
 
 # Tracking Statewide Vaccinations {.tabset .tabset-fade .tabset-pills}
 
