@@ -326,12 +326,20 @@ While I was expecting to see an evening out of the map, I was surprised to see h
 
 As a limitation, I would like to note that this map is measuring the cumulative number of vaccine doses administered as a percent of population, and does not necessarily accurately reflect the number of people fully/partially vaccinated. The data I used only had the number of vaccine doses given per day, and since Pfizer-BioNTech and Moderna require 2 doses to be fully vaccinated, while Johnson and Johnson only requires one shot, I did not have a way to extract information needed to measure the number of people fully/partially vaccinated in each state. I do think it would be extremely informative to have a map that did have the number of people fully vaccinated as a measurement. 
 
-Lastly, I created a shiny app that represented the same information in line graph form, so that someone can more easily compare vaccine doses given within different states. 
+Lastly, I created a [shiny app](https://krverma22.shinyapps.io/usastatevaccinations/) that represents the same information in line graph form, so that someone can more easily compare vaccine doses given within different states. The user is able to click through and decide which variable they want to measure. Below is a description of the variables:
+
+* Cumulative Vaccinations: the cumulative number of vaccine doses given each day in a state
+
+* Cumulative Vaccines Delivered as a Percent of Population: the cumulative number of vaccine doses given each day in a state divided by the state population, multiplied by 100
+
+* Vaccinations Administered per Day: the daily number of vaccinations delivered each day in a state
+
+* Vaccinations Administered per Day as a Percent of Population: the daily number of vaccinations delivered each day in a state divided by the state population, multiplied by 100
 
 
 
 
-Here is a [this](https://fortune.com/2021/04/23/nobody-was-coming-these-red-states-are-turning-down-vaccines-as-demand-plummets/) to a shiny app where one can look at vaccine trends in the United States as a line graph:
+
 
 
 

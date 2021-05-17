@@ -19,6 +19,14 @@ kv_data <- read_csv("us-daily-covid-vaccine-doses-administeredpopstate.csv")
 # for TAB 1 (line) widgets: 
 # for selectInput, 'choices' object should be a NAMED LIST
 
+
+states <- c("Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida",
+            "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana",
+            "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri",
+            "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", 
+            "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", 
+            "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", 
+            "West Virginia", "Wisconsin", "Wyoming")
                         
 kv_states_shiny <- kv_data %>%
   filter(Entity %in% states) %>%
@@ -32,8 +40,8 @@ kv_states_shiny <- kv_data %>%
 
 line_choice_values <- c("cumulative_vaccinations", "percentpopcumulative", "daily_vaccinations", "percentdaily")
 
-line_choice_names <- c("Cumulative Vaccinations", "Cumulative Vaccines Delivered as a Percent of Population", "Vaccinations Adminstered per Day", 
-                       "Vaccines Administered per Day as a Percent of Population")
+line_choice_names <- c("Cumulative Vaccinations", "Cumulative Vaccines Delivered as a Percent of Population", "Vaccinations Administered per Day", 
+                       "Vaccinations Administered per Day as a Percent of Population")
 names(line_choice_values) <- line_choice_names
 
 #for checkboxGroupInput
@@ -73,10 +81,10 @@ state_choices <- unique(kv_states_shiny$state)
 ############
 ui <- navbarPage(
   
-  title = "testing",
+  title = "USA State Vaccinations",
   
   tabPanel(
-    title = "Line",
+    title = "Line Graphs",
     sidebarLayout(
       sidebarPanel(
         selectInput(inputId = "linevar"
@@ -115,11 +123,11 @@ server <- function(input,output){
   # 
   output$line <- renderPlot({
     ggplot() +
-      geom_line(data = data_for_state(), aes_string(x = "Day", y = input$linevar, color = "state")) 
-    # +
-    #   labs(
-    #     #x = line_choice_names[line_choice_values == input$linevar]
-    #        y = line_choice_names)
+      geom_line(data = data_for_state(), aes_string(x = "Day", y = input$linevar, color = "state")) +
+   
+       labs(color = "State",
+         #x = line_choice_names[line_choice_values == input$linevar]
+           y = line_choice_names[line_choice_values == input$linevar])
   })
 }
 
