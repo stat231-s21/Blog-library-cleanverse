@@ -132,7 +132,7 @@ anim_map_perc
 #length(unique(usa_vaccine_states$Day))
 #https://stackoverflow.com/questions/52332967/problem-with-many-50-states-in-gganimate
 animate(anim_map_perc, nframes = 2*length(unique(usa_vaccine_states$Day))
-        , renderer = gifski_renderer("usapercentfinal2.gif"))
+        , renderer = gifski_renderer("usapercentfinal3.gif"))
 
  
 ```
