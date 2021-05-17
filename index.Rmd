@@ -246,7 +246,13 @@ ggplot(ratio_map, aes(x = long, y = lat, group = group, fill = ratio_overall)) +
        Results)", fill = "Democratic Ratios") +
   theme(legend.position="bottom")
 ```
+The above map shows many interesting results. First, we can see what we already knew: areas in the the South and Great Plains had some of the lowest ratios. However, it allows us to catch a much wider pattern. In simple terms, there is more dark blue than dark red. Conversely, there is more light red than light blue. 
 
+These results imply that Republican areas are likely to have a lower amount of vaccinations administered out of the ones received. That means they're wasting more doses and, based on the above results, they probably have less percentage of their population above 18 fully vaccinated. 
+
+What could explain this trend? Well, there has been a lot of misinformation spread by conspiracies such as [Q-Anon](https://www.washingtonpost.com/technology/2021/03/11/with-trump-gone-qanon-groups-focus-fury-attacking-covid-vaccines/), which has an easier time slipping into Republican discourse, as the conspiracy is pro-Trump and more pro-Republican. These conspiracies tell people not to get the vaccine, for fear of being tracked by the government. That misinformation is possibly responsible for the wasted doses: people simply don't want the shots. 
+
+That's not to say that there's no misinformation on the Democratic side, but it might be impacting the sides differently, with strong impact in Republican states. 
 
 ```{r boxplot, echo=FALSE, warning=FALSE, message=FALSE}
 #boxplot
