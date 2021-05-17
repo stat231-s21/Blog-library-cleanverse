@@ -249,7 +249,10 @@ ggplot(ratio_map, aes(x = long, y = lat, group = group, fill = ratio_overall)) +
   labs(title = "Ratio of Vaccines Received to Vaccines Administered", subtitle = "Stratified by Politics (2020 Presidential Election
        Results)", fill = "Democratic Ratios") +
   theme(legend.position="bottom")
+```
 
+
+```{r boxplot, echo=FALSE, warning=FALSE, message=FALSE}
 #boxplot
 ratios.boxplot <- ratios.2 %>%
   mutate(politics = case_when(dem_votes > rep_votes ~ "Democrat", dem_votes < rep_votes ~ "Republican"))
