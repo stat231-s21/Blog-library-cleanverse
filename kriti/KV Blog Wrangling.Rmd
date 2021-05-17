@@ -72,7 +72,8 @@ usa_states <- map_data(map = "state", region = ".")
 
 # changing from left_join to inner_join to remove alaska & hawaii
 usa_vaccine_states <- kv_states %>%
-  inner_join(usa_states, by = c("state" = "region")) 
+  inner_join(usa_states, by = c("state" = "region")) %>%
+  filter(state %in% "alabama")
   
   
 
