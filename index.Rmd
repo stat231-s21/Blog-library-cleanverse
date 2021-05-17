@@ -20,6 +20,10 @@ library(maps)
 library(leaflet)
 library(ggnewscale)
 library(gridExtra)
+library(readxl)
+library(scales)
+library(ggpubr)
+library(ggplot2)
 ```
 
 # Project Description
@@ -40,14 +44,6 @@ An issue central to policy response to the COVID-19 pandemic is how to efficient
 
 ```{r, echo = FALSE, message = FALSE}
 # read in and plot ca vax over time
-library(tidyverse)
-library(dplyr)
-library(readxl)
-library(scales)
-library(viridis)
-library(ggpubr)
-library(ggplot2)
-
 ca_time <- read_csv("ca_time.csv") %>%
   filter(race != "Unknown", race != "Other/Multiracial")
 ca_tg <- ggplot(ca_time, aes(x = date, y = frac, colour = Race)) +
