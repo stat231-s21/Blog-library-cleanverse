@@ -34,8 +34,6 @@ Once we'd settled on a topic, we began to look for data sources. In the end, we 
 
 From there, we moved to analysis. That work was broken into three main sections. They are all easily accessible via tabs on the left-hand side of your screen. Enjoy!
 
-
-
 # Comparison: CA and TN {.tabset .tabset-fade .tabset-pills}
 
 An issue central to policy response to the COVID-19 pandemic is how to efficiently, equitably, and safely administered vaccinations among subpopulations of a given country's citizens. Especially given the race-related events, movements, and justice and injustices in the past year, equitable vaccine distribution among racial groups is a very important, highly studied topic. Below, we will analyze vaccine administration by race in California and Tennessee, two historically partisan states, to see how well racially just policies and public health hopes are faring as they are put into practice. To calculate the proportion of racial groups, I scaled vaccine counts by racial subpopulations in California and Tennessee. 
@@ -82,7 +80,6 @@ Similarly, most other groups of people of color in California were vaccinated at
 In Tennessee, we also see a similar vaccination rate between Asian Tennesseeans and Caucasian Tennesseeans. This also suggests that Asian Tennesseeans encounter less stark systemic race-related barriers to COVID-19 vaccination. However, Black Tennesseeans appear to receive COVID-19 vaccinations at lower rates than their non-Black counterparts, which suggests that vaccine distribution between Black and non-Black communities in Tennessee is not equitable.
 
 Lastly, it is important to note that in general, the overall vaccination rates in Tennessee are higher than in California. I theorize that this is because the Tennessee dataset did not specify whether vaccine counts meant fully vaccinated persons or vaccine doses administered, whereas the California dataset supplied counts of fully vaccinated persons. Since the overall purpose of this visualization was to compare rates between racial groups, and I believe that it is a fair assumption to say that racial groups and vaccine type (i.e. one-dose series or two-dose series) are not confounded, I hope that you all will find this visualization adequate.
-
 
 
 ```{r, echo = FALSE, message = FALSE}
@@ -174,7 +171,7 @@ map_rep <- ratio_map %>%
 
 ## Initial Maps, Scatterplot
 
-Below are the first two visualizations I created, meant to justify my investigation of politcal impacts on vaccination ratios.
+Below are the first two visualizations I created, meant to justify my investigation of political impacts on vaccination ratios.
 
 ```{r maps, echo=FALSE, warning=FALSE, message=FALSE}
 #overall vaccinated map
@@ -202,15 +199,36 @@ ratio_overall_map <- ggplot(ratio_map, aes(x = long, y = lat, group = group
 
 #combine
 grid.arrange(vax_overall_map, ratio_overall_map, ncol=2)
+```
 
+The above maps were meant to provide a bird's eye view of the issue. If I'm interested in state's success with vaccination, that means looking at underlying factors that could explain differential population inoculation. Specifically, I wanted to know whether the proportion of vaccines administered out of the total relieved by a state  appeared to be correlated with the overall statewide progress. 
+
+To look at that question, I first created the above maps. They allowed me to visualize, in a very easy way, whether it was worth considering vaccination ratio as a possible cause of some state's advancements. They confirmed, in my mind, that it was. As you can see, states with very dark shading on the left-hand map tended to also have dark shading on the right-hand map. In simpler terms, this means that when a state has much of its adult population fully vaccinated, it also usually is efficient about using the doses that it's given. This is an interesting result, as it suggests much of the differential progress states are making in fighting COVID is due to their own medical progress, not due to the government misallocating shots. 
+
+The other benefit of creating these maps was that it allowed me to look at regional patterns. I could see that the South, in addition to some Great Plains states, had very low levels on both maps. Now, those are historically Repbulican regions. That inspired me to go ahead with my political research. 
+
+
+```{r scatterplot,echo=FALSE, warning=FALSE, message=FALSE}
 #scatterplot
 ggplot(ratios.2, aes(x=percent_full_18, y=ratio_overall)) + 
   geom_point() +
   geom_smooth(method="lm", se=TRUE, fullrange=FALSE) +
     labs(title = "Association Between % Vaccination and Administration", x = "Percent
          of 18+ Population Fully Vaccinated", y = "Ratio of Recieved/Admin Vaccines")
+
+testing <- lm(percent_full_18 ~ ratio_overall, data=ratios.2)
+summary(testing)
+```
+```{r linearmodel,echo=FALSE, warning=FALSE, message=FALSE, eval=FALSE}
+testing <- lm(percent_full_18 ~ ratio_overall, data=ratios.2)
+summary(testing)
 ```
 
+In this section, I also created the scatterplot. The aim here was simple. In some circumstances, the eye can trick us. I wanted to confirm that the correlation I thought I saw actually existed, rather than being a result of my own bias. 
+
+As we can see though, there is a reasonably strong, positive correlation between the perfect of the 18+ population that is fully vaccinated and the ratio administered. It's true that we see some variability and some clustering, but I would say it's far from a random scatter. Indeed, further investigation confirmed that a linear model predicting vaccination progress from the administration ratio explains 46% of the variability in vaccinations on the statewide level. That's almost half!
+
+Given this research, there's a clear motive to understanding what's causing these failures in adminsitration, as we can then better combat them and move towards vaccination. 
 
 ## Political Map, Boxplot
 
