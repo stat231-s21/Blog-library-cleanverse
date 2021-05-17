@@ -30,13 +30,11 @@ It's no secret that COVID-19 has dramatically changed our lives over the course 
 
 When we sat down to discuss what to study, we were all drawn to the dramatic impact of vaccinations. And although different aspects of the issue, ranging from differential state effects, to political correlations, to adaptations over time, caught our attention, it was clear that we wanted to study vaccination data. We thought we'd turn to the United States, as our previous project had a more international focus. 
 
-Once we'd settled on a topic, we began to look for data sources. In the end, we ended up with six datasets. The first two focused on state level vaccination data, in California and Tennessee respectively. In a similar vein, there was a dataset that contained information about Tennessee on a county-wide level. The next two were more general, containing basic information about doses administered over time: one was from the CDC, one was from our world in data. Finally, we used a dataset from the MIT Elections Lab to learn about past political results. 
+Once we'd settled on a topic, we began to look for data sources. In the end, we ended up with six datasets. The first two focused on state level vaccination data, in California and Tennessee respectively. In a similar vein, there was a dataset that contained information about Tennessee on a county-wide level. The next two were more general, containing basic information about doses administered over time: one was from the CDC, one was from [our world in data](https://ourworldindata.org/us-states-vaccinations). Finally, we used a dataset from the MIT Elections Lab to learn about past political results. 
 
 From there, we moved to analysis. That work was broken into three main sections. They are all easily accessible via tabs on the left-hand side of your screen. Enjoy!
 
-## Results
 
-In the end, we discovered several interesting patterns with regard to vaccination in the United States. 
 
 # Comparison: CA and TN {.tabset .tabset-fade .tabset-pills}
 
@@ -304,17 +302,15 @@ Here is the result:
 
 ![Cumulative Number of Vaccine Doses Delivered by State ](https://raw.githubusercontent.com/stat231-s21/Blog-library-cleanverse/main/kriti/usavaccinesfinal.gif)
 
-As we see on the time lapse, it seems that California, Texas, Florida, and New York consistently delivered the most vaccine doses from the beginning of the vaccine rollout. For instance, on January 18th, these states had begun to turn green, while the other states were still yellow.
+As we see on the time lapse, it seems that California, Texas, Florida, and New York consistently delivered the most vaccine doses from the beginning of the vaccine rollout. For instance, on January 20th, these states had begun to turn green, while the other states were still yellow.
 
 
-#insert pic of Jan 18
 
-
+![Cumulative Number of Vaccine Doses Delivered by State ](https://raw.githubusercontent.com/stat231-s21/Blog-library-cleanverse/main/kriti/Jan 20.png)
 
 
 
 And, the trend continues throughout the time lapse as well. As we start to see how the other states' cumulative number of vaccine doses given changes from January to May, we can see that in general, the right half of the country seems to be on the upper side of the scale, while the left half of the country is on the lower end of the scale.
-
 
 However, it's important to note that while California, Texas, Florida, and New York have the most vaccine doses given, they also have the biggest populations. Because they have the biggest populations, it makes sense that they would get a larger number of doses allocated to them, which means that they would give a larger number of doses each day, meaning their cumulative number of vaccine doses given will be very high. 
 
@@ -322,9 +318,13 @@ So, in order to be as accurate as possible in my conclusions (and answer my seco
 
 In order to do this, I created a new column that took the cumulative number of vaccines for each day, and divided it by the state population for each day in each state.
 
-While I was expecting to see an evening out of the map, I was surprised to see how much the map standardized. In the previous map, measuring the number of vaccinations, the map had states from all different places on the scale. However, in the second map, all of the states were a shade of dark blue, which meant that their cumulative numbers of vaccines doses given as a percent of population were all close to each other, and close to the higher end of the scale. 
+From there, I used the same process as I did for the first timelapse.
 
-As a limitation, I would like to note that this map is measuring the cumulative number of vaccine doses administered as a percent of population, and does not necessarily accurately reflect the number of people fully/partially vaccinated. The data I used only had the number of vaccine doses given per day, and since Pfizer-BioNTech and Moderna require 2 doses to be fully vaccinated, while Johnson and Johnson only requires one shot, I did not have a way to extract information needed to measure the number of people fully/partially vaccinated in each state. I do think it would be extremely informative to have a map that did have the number of people fully vaccinated as a measurement. 
+Here is the result:
+
+![Cumulative Number of Vaccine Doses Delivered by State as a Percent of Population ](https://raw.githubusercontent.com/stat231-s21/Blog-library-cleanverse/main/kriti/usapercentfinal3.gif)
+
+While I was expecting to see an evening out of the map, I was surprised to see how much the map standardized. In the previous map, measuring the number of vaccinations, the map had states from all different places on the scale. However, in the second map, all of the states were a shade of dark blue, which meant that their cumulative numbers of vaccines doses given as a percent of population were all close to each other, and close to the higher end of the scale. 
 
 Lastly, I created a [shiny app](https://krverma22.shinyapps.io/usastatevaccinations/) that represents the same information in line graph form, so that someone can more easily compare vaccine doses given within different states. The user is able to click through and decide which variable they want to measure. Below is a description of the variables:
 
@@ -336,11 +336,13 @@ Lastly, I created a [shiny app](https://krverma22.shinyapps.io/usastatevaccinati
 
 * Vaccinations Administered per Day as a Percent of Population: the daily number of vaccinations delivered each day in a state divided by the state population, multiplied by 100
 
+# Limitations
 
+As a limitation, I would like to note that second time lapse map is measuring the cumulative number of vaccine doses administered as a percent of population, and does not necessarily accurately reflect the number of people fully/partially vaccinated. The data I used only had the number of vaccine doses given per day, and since Pfizer-BioNTech and Moderna require 2 doses to be fully vaccinated, while Johnson and Johnson only requires one shot, I did not have a way to extract information needed to measure the number of people fully/partially vaccinated in each state. I do think it would be extremely informative to have a map that did have the number of people fully vaccinated as a measurement. 
 
+# Conclusion
 
+We discovered several interesting patterns with regard to vaccination in the United States. 
 
-
-
-
+Lastly, we found that while there has been a lot of discussion within the United States about different states moving faster than others when it comes to vaccinations, most states are giving vaccination doses at a similar rate when taking into account their populations, even if raw numbers differ widely.
 
