@@ -73,7 +73,7 @@ Unfortunately, the datasets available on California and Tennessee vaccinations h
 
 Similarly, most other groups of people of color in California were vaccinated at rates below Caucasian Californians (except for Asian Californians and Native Hawaiian/Pacific Islander Californians). This suggests that Black and Brown communities encounter barriers to receiving vaccinations. Asian Californians appear to receive vaccines at similar rates to Caucasian Californians, which suggests a possibly less stark set of systemic barriers keeping Asian Californians from accessing the COVID-19 vaccine. Lastly, Native Hawaiian or Pacific Islander Californians appear to have consistently received the COVID-19 vaccine from the start. One theory for this occurrence is that Native Hawaiians whose tribal status is federally or regionally recognized may be able to receive the COVID-19 vaccine more easily via Indian Health Service vaccination clinics. However, this theory does not align with the low rates that non-Hawaiian Natives appear to be receiving vaccines.
 
-In Tennessee, we also see a similar vaccination rate between Asian Tennesseeans and Caucasian Tennesseeans. This also suggests that Asian Tennesseeans encounter less stark systemic race-related barriers to COVID-19 vaccination. However, Black Tennesseeans appear to receive COVID-19 vaccinations at lower rates than their non-Black counterparts, which suggests that vaccine distribution between Black and non-Black communities in Tennessee is not equitable.
+In Tennessee, we also see a similar vaccination rate between Asian Tennesseans and Caucasian Tennesseans. This also suggests that Asian Tennesseans encounter less stark systemic race-related barriers to COVID-19 vaccination. However, Black Tennesseans appear to receive COVID-19 vaccinations at lower rates than their non-Black counterparts, which suggests that vaccine distribution between Black and non-Black communities in Tennessee is not equitable.
 
 Lastly, it is important to note that in general, the overall vaccination rates in Tennessee are higher than in California. I theorize that this is because the Tennessee dataset did not specify whether vaccine counts meant fully vaccinated persons or vaccine doses administered, whereas the California dataset supplied counts of fully vaccinated persons. Since the overall purpose of this visualization was to compare rates between racial groups, and I believe that it is a fair assumption to say that racial groups and vaccine type (i.e. one-dose series or two-dose series) are not confounded, I hope that you all will find this visualization adequate.
 
@@ -125,7 +125,7 @@ Lastly, the above graph shows the change in total vaccine doses in Tennessee bet
 
 ## Data and Methods
 
-Much has been made of the possible correlation between political inclination and vaccine hesitancy, a phenomenon where people refuse to get their COVID-19 vaccination shot, even though the innoculation has been proven sound from a medical perspective. Articles such as [this](https://fortune.com/2021/04/23/nobody-was-coming-these-red-states-are-turning-down-vaccines-as-demand-plummets/) one from Fortune Magazine and [this](https://www.nytimes.com/interactive/2021/04/17/us/vaccine-hesitancy-politics.html) one from the New York Times allege that Trump voters and, to some extent, Republicans, are more likely to refuse vaccination. 
+Much has been made of the possible correlation between political inclination and vaccine hesitancy, a phenomenon where people refuse to get their COVID-19 vaccination shot, even though the inoculation has been proven sound from a medical perspective. Articles such as [this](https://fortune.com/2021/04/23/nobody-was-coming-these-red-states-are-turning-down-vaccines-as-demand-plummets/) one from Fortune Magazine and [this](https://www.nytimes.com/interactive/2021/04/17/us/vaccine-hesitancy-politics.html) one from the New York Times allege that Trump voters and, to some extent, Republicans, are more likely to refuse vaccination. 
 
 To visualize this idea, I drew from two data sources. First, I relied on the CDC's vaccination records. I was comfortable with the reliability of that source. I also drew from the MIT Election Lab, which provided me a comprehensive list of state's voting records, including during the 2020 presidential election, which I was most interested in. 
 
@@ -201,7 +201,7 @@ The above maps were meant to provide a bird's eye view of the issue. If I'm inte
 
 To look at that question, I first created the above maps. They allowed me to visualize, in a very easy way, whether it was worth considering vaccination ratio as a possible cause of some state's advancements. They confirmed, in my mind, that it was. As you can see, states with very dark shading on the left-hand map tended to also have dark shading on the right-hand map. In simpler terms, this means that when a state has much of its adult population fully vaccinated, it also usually is efficient about using the doses that it's given. This is an interesting result, as it suggests much of the differential progress states are making in fighting COVID is due to their own medical progress, not due to the government misallocating shots. 
 
-The other benefit of creating these maps was that it allowed me to look at regional patterns. I could see that the South, in addition to some Great Plains states, had very low levels on both maps. Now, those are historically Repbulican regions. That inspired me to go ahead with my political research. 
+The other benefit of creating these maps was that it allowed me to look at regional patterns. I could see that the South, in addition to some Great Plains states, had very low levels on both maps. Now, those are historically Republican regions. That inspired me to go ahead with my political research. 
 
 
 ```{r scatterplot,echo=FALSE, warning=FALSE, message=FALSE}
@@ -224,9 +224,13 @@ In this section, I also created the scatterplot. The aim here was simple. In som
 
 As we can see though, there is a reasonably strong, positive correlation between the perfect of the 18+ population that is fully vaccinated and the ratio administered. It's true that we see some variability and some clustering, but I would say it's far from a random scatter. Indeed, further investigation confirmed that a linear model predicting vaccination progress from the administration ratio explains 46% of the variability in vaccinations on the statewide level. That's almost half!
 
-Given this research, there's a clear motive to understanding what's causing these failures in adminsitration, as we can then better combat them and move towards vaccination. 
+Given this research, there's a clear motive to understanding what's causing these failures in administration, as we can then better combat them and move towards vaccination. 
 
 ## Political Map, Boxplot
+
+This section was intended to investigate the link between a state's voting record in the 2020 presidential election and their ability to administer as many doses as they receive. In all cases, when I describe a state as Democratic, I mean that it "went blue" in the 2020 election. In simpler terms, I mean that the majority of the population voted for Joe Biden. Conversely, when I say that a state is Republican, I mean that the majority of the population voted for Donald Trump, the incumbent. 
+
+I chose this election to focus on as it's the most recent. Additionally, Trump has changed the dynamics of the Republican party, so whether they voted to reelect him is the most relevant information about a state's modern political inclinations.  
 
 ```{r political, echo=FALSE, warning=FALSE, message=FALSE}
 #political vaccine map
@@ -274,7 +278,7 @@ To summarize, then: we have evidence that one of the major factors impacting the
 
 The final bit of analysis showed that one reason people don't want doses is possibly because of their political inclination. We can see on a statewide level, that likely had an effect. There's certainly a difference in medians when stratified by voting history. 
 
-The one outlier is Georgia, which is notably historically Republican, and flipped this election. 
+The one outlive is Georgia, which is notably historically Republican, and flipped this election. 
 
 # Tracking Statewide Vaccinations {.tabset .tabset-fade .tabset-pills}
 
@@ -370,6 +374,8 @@ Lastly, I created a [shiny app](https://krverma22.shinyapps.io/usastatevaccinati
 # Limitations
 
 As a limitation, I would like to note that second time lapse map is measuring the cumulative number of vaccine doses administered as a percent of population, and does not necessarily accurately reflect the number of people fully/partially vaccinated. The data I used only had the number of vaccine doses given per day, and since Pfizer-BioNTech and Moderna require 2 doses to be fully vaccinated, while Johnson and Johnson only requires one shot, I did not have a way to extract information needed to measure the number of people fully/partially vaccinated in each state. I do think it would be extremely informative to have a map that did have the number of people fully vaccinated as a measurement. 
+
+Next, with regard to the political analysis, it's important to clarify that a major limitation is our inability to determine causality. Without preforming an experiment, we cannot make any causal assumptions: rather, we can determine associations. This really impacts the conclusions we're able to meaningfully draw. In further research, we could try and conduct at least a randomized study of political affiliation and vaccine opinion, to try and get closer to establishing a stronger type of connection.  
 
 # Conclusion
 
