@@ -353,7 +353,7 @@ From there, I used the same process as I did for the first timelapse.
 
 Here is the result:
 
-![Cumulative Number of Vaccine Doses Delivered by State as a Percent of Population ](https://raw.githubusercontent.com/stat231-s21/Blog-library-cleanverse/main/kriti/usapercentfinal3.gif)
+![Cumulative Number of Vaccine Doses Delivered by State as a Percent of Population ](https://raw.githubusercontent.com/stat231-s21/Blog-library-cleanverse/main/kriti/usapercentfinal4.gif)
 
 While I was expecting to see an evening out of the map, I was surprised to see how much the map standardized. In the previous map, measuring the number of vaccinations, the map had states from all different places on the scale. However, in the second map, all of the states were a shade of dark blue, which meant that their cumulative numbers of vaccines doses given as a percent of population were all close to each other, and close to the higher end of the scale. 
 
