@@ -72,10 +72,9 @@ usa_states <- map_data(map = "state", region = ".")
 
 # changing from left_join to inner_join to remove alaska & hawaii
 usa_vaccine_states <- kv_states %>%
-  inner_join(usa_states, by = c("state" = "region")) %>%
-  filter(state %in% "alabama")
-  
-  
+  inner_join(usa_states, by = c("state" = "region")) 
+
+
 
 # IT'S WORKING!! after removed Alaska and Hawaii 
 anim_map_us <- usa_vaccine_states %>%
@@ -133,7 +132,7 @@ anim_map_perc
 #length(unique(usa_vaccine_states$Day))
 #https://stackoverflow.com/questions/52332967/problem-with-many-50-states-in-gganimate
 animate(anim_map_perc, nframes = 2*length(unique(usa_vaccine_states$Day))
-        , renderer = gifski_renderer("usapercentfinal3.gif"))
+        , renderer = gifski_renderer("usapercentfinal4.gif"))
 
  
 ```
