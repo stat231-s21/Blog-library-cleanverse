@@ -337,7 +337,7 @@ Here is the result:
 
 ![Cumulative Number of Vaccine Doses Delivered by State ](https://raw.githubusercontent.com/stat231-s21/Blog-library-cleanverse/main/kriti/usavaccinesfinal.gif)
 
-As we see on the time lapse, it seems that California, Texas, Florida, and New York consistently delivered the most vaccine doses from the beginning of the vaccine rollout. For instance, on January 20th, these states had begun to turn green, while the other states were still yellow.
+As we see on the time lapse, it seems that California, Texas, Florida, and New York consistently delivered the most vaccine doses from the beginning of the vaccine rollout. For instance, on January 19th, these states had begun to turn green, while the other states were still yellow.
 
 
 
