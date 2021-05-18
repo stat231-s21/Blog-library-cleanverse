@@ -374,7 +374,7 @@ Lastly, I created a [shiny app](https://krverma22.shinyapps.io/usastatevaccinati
 What I found really interesting, was that when we look at Vaccinations Administered per Day as a Percent of Population, the states as a group were steadily increasing until about mid-April, and then started a decline after that. 
 
 
-
+![Shiny App: Vaccinations Administered per Day as a Percent of Population](https://raw.githubusercontent.com/stat231-s21/Blog-library-cleanverse/main/kriti/Snip20210517_1.png)
 
 
 This matches the NY Times finding that vaccine administration started decreasing steadily, after the pause of use of the Johnson and Johnson vaccine. I thought it was very interesting that all of the states moved together as a unit, rather than branching off at any point. This was interesting, because while there was a lot of range in number of doses given, the states all moved together to a decline at this mid-April point.
