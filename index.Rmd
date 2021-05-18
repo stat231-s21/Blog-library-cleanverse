@@ -391,5 +391,7 @@ Next, with regard to the political analysis, it's important to clarify that a ma
 
 We discovered several interesting patterns with regard to vaccination in the United States. 
 
+Looking at vaccine rollout by race in California and Tennessee revealed inequitable vaccine dosage, suggesting that communities of color encounter starker barriers to vaccine access than white communities do. Also, vaccine rollout visualizations between February 15th and April 15th suggest large dose increases in urban areas and bring the issue of sparse rural healthcare to light.
+
 We found that while there has been a lot of discussion within the United States about different states moving faster than others when it comes to vaccinations, most states are giving vaccination doses at a much more similar rate when taking into account their populations, even if raw numbers differ widely.
 
