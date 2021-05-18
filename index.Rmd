@@ -391,5 +391,5 @@ Next, with regard to the political analysis, it's important to clarify that a ma
 
 We discovered several interesting patterns with regard to vaccination in the United States. 
 
-Lastly, we found that while there has been a lot of discussion within the United States about different states moving faster than others when it comes to vaccinations, most states are giving vaccination doses at a similar rate when taking into account their populations, even if raw numbers differ widely.
+We found that while there has been a lot of discussion within the United States about different states moving faster than others when it comes to vaccinations, most states are giving vaccination doses at a much more similar rate when taking into account their populations, even if raw numbers differ widely.
 
