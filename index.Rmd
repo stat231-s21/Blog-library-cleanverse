@@ -329,7 +329,7 @@ anim_map_us
 
 #adjusting the number of frames to cycle through in order to cycle through all of the dates
 animate(anim_map_us, nframes = 2*length(unique(usa_vaccine_states$Day))
-        , renderer = gifski_renderer("kriti/usa_vaccine_number.gif"))
+        , renderer = gifski_renderer("kriti/usavaccinesfinal1.gif"))
 ```
 
 
@@ -370,6 +370,16 @@ Lastly, I created a [shiny app](https://krverma22.shinyapps.io/usastatevaccinati
 * Vaccinations Administered per Day: the daily number of vaccinations delivered each day in a state
 
 * Vaccinations Administered per Day as a Percent of Population: the daily number of vaccinations delivered each day in a state divided by the state population, multiplied by 100
+
+What I found really interesting, was that when we look at Vaccinations Administered per Day as a Percent of Population, the states as a group were steadily increasing until about mid-April, and then started a decline after that. 
+
+
+
+
+
+This matches the NY Times finding that vaccine administration started decreasing steadily, after the pause of use of the Johnson and Johnson vaccine. I thought it was very interesting that all of the states moved together as a unit, rather than branching off at any point. This was interesting, because while there was a lot of range in number of doses given, the states all moved together to a decline at this mid-April point.
+
+
 
 # Limitations
 
