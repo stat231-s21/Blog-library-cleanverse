@@ -341,7 +341,7 @@ As we see on the time lapse, it seems that California, Texas, Florida, and New Y
 
 
 
-![Cumulative Number of Vaccine Doses Delivered by State ](https://raw.githubusercontent.com/stat231-s21/Blog-library-cleanverse/main/kriti/Jan 20.png)
+![Cumulative Number of Vaccine Doses Delivered by State ](https://raw.githubusercontent.com/stat231-s21/Blog-library-cleanverse/main/kriti/jan 20 fixed.png)
 
 
 
@@ -377,7 +377,7 @@ What I found really interesting, was that when we look at Vaccinations Administe
 ![Shiny App: Vaccinations Administered per Day as a Percent of Population](https://raw.githubusercontent.com/stat231-s21/Blog-library-cleanverse/main/kriti/Snip20210517_1.png)
 
 
-This matches the NY Times finding that vaccine administration started decreasing steadily, after the pause of use of the Johnson and Johnson vaccine. I thought it was very interesting that all of the states moved together as a unit, rather than branching off at any point. This was interesting, because while there was a lot of range in number of doses given, the states all moved together to a decline at this mid-April point.
+This matches the [NY Times](https://www.nytimes.com/interactive/2021/05/04/us/vaccine-rollout-slowing.html) finding that vaccine administration started decreasing steadily, after the pause of use of the Johnson and Johnson vaccine. I thought it was very interesting that all of the states moved together as a unit, rather than branching off at any point. This was interesting, because while there was a lot of range in number of doses given, the states all moved together to a decline at this mid-April point.
 
 
 
