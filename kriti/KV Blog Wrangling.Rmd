@@ -47,6 +47,10 @@ kv_states <- kv_vaccine_states %>%
   group_by(state) %>%
   summarise(Day, daily_vaccinations, state_population, cumulative_vaccinations = cumsum(daily_vaccinations)) %>%
   mutate(percentpop = (cumulative_vaccinations/state_population) * 100)
+
+kv_states_highest <- kv_states %>%
+  filter(Day == "2021-05-15") %>%
+  arrange(desc(percentpop))
   
 ```
 
