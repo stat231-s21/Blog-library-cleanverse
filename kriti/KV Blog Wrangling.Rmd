@@ -39,6 +39,7 @@ states <- c("Alabama", "Arizona", "Arkansas", "California", "Colorado", "Connect
 "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri",
 "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming")
 
+#creating object
 kv_states <- kv_vaccine_states %>%
   filter(Entity %in% states) %>%
   mutate(state = tolower(Entity)
@@ -48,6 +49,7 @@ kv_states <- kv_vaccine_states %>%
   summarise(Day, daily_vaccinations, state_population, cumulative_vaccinations = cumsum(daily_vaccinations)) %>%
   mutate(percentpop = (cumulative_vaccinations/state_population) * 100)
 
+#finding the states with the highest and lowest cumulative vaccine doses per population
 kv_states_highest <- kv_states %>%
   filter(Day == "2021-05-15") %>%
   arrange(desc(percentpop))
@@ -89,7 +91,7 @@ animate(anim_map_us, nframes = 2*length(unique(usa_vaccine_states$Day))
 ```
 
 ```{r}
-#percent plot
+#percent plot - doing the same thing as the first time lapse gganimate plot, but with a different variable: percentpop
 
 anim_map_perc <- usa_vaccine_states %>%
 ggplot() +

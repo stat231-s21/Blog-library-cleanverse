@@ -23,7 +23,8 @@ states <- c("Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado"
             "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", 
             "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", 
             "West Virginia", "Wisconsin", "Wyoming")
-                        
+
+#creating object                      
 kv_states_shiny <- kv_data %>%
   filter(Entity %in% states) %>%
   mutate(state = tolower(Entity)
@@ -34,6 +35,7 @@ kv_states_shiny <- kv_data %>%
   mutate(percentpopcumulative = cumulative_vaccinations/state_population, percentdaily = daily_vaccinations/state_population, 
          state = str_to_title(state))
 
+#creating choices for user to pick variables and states to include
 line_choice_values <- c("cumulative_vaccinations", "percentpopcumulative", "daily_vaccinations", "percentdaily")
 
 line_choice_names <- c("Cumulative Vaccinations", "Cumulative Vaccines Delivered as a Percent of Population", "Vaccinations Administered per Day", 
@@ -79,12 +81,13 @@ ui <- navbarPage(
 ############
 server <- function(input,output){
   
-  
+  #creating reactive dataset
   data_for_state <- reactive({
     data <- filter(kv_states_shiny, state %in% input$statevar)
 
   })
-  
+
+  #creating plot
   output$line <- renderPlot({
     ggplot() +
       geom_line(data = data_for_state(), aes_string(x = "Day", y = input$linevar, color = "state")) +
